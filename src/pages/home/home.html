@@ -1,0 +1,21 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Ionic Message List
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    
+    <button ion-button color="danger" round>Generate Report</button>
+    <ion-list>
+        <ion-item *ngFor="let x of messages"> 
+            <h2>{{x.address}}</h2>
+            <p>{{x.body}}</p>
+            <p>{{x.date}}</p>
+        </ion-item>
+    </ion-list>
+
+     {{data}}
+</ion-content>
