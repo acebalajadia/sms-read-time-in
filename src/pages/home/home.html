@@ -7,15 +7,32 @@
 </ion-header>
 
 <ion-content padding>
-    
-    <!-- <button ion-button color="danger" round (click)="sendreport()">Generate Report</button> -->
-    <textarea name="" id="" cols="30" rows="10" >{{data}}</textarea> 
-    <!-- <ion-list>
-        <ion-item *ngFor="let x of messages"> 
-            <h2>{{x.address}}</h2>
-            <p>{{x.body}}</p>
-            <p>{{x.date}}</p>
+
+    <button ion-button color="danger" round (click)="generateLeg2Report()">Generate Leg2 Report</button>
+
+
+    <ion-list>
+        <ion-item *ngFor="let item of timelogs">
+            <!-- <label for="">{{item.name}}</label>
+             <label for="">{{item.early}}</label>
+             <label for="">{{item.late}}</label>
+             <label for="">{{item.overtim}}</label> -->
+
+            <ion-avatar item-start>
+                <img src="/assets/imgs/logo.png">
+            </ion-avatar>
+            <h2>{{item.name}}</h2>
+            <h3>{{item.date}}</h3>
+            
+            <ion-badge [color]="item.activity == 'IN' ? 'secondary' : 'dark'">{{item.activity}}</ion-badge>
+            <ion-badge *ngIf="item.early" color="secondary" item-end>Early {{item.early}}</ion-badge>
+            <ion-badge *ngIf="item.late" color="danger" item-end>Late {{item.late}}</ion-badge>
+            <ion-badge *ngIf="item.overtime" item-end>OT {{item.overtime}}</ion-badge>
+            <p *ngIf="item.justification">{{item.justification}}</p>
         </ion-item>
-    </ion-list> -->
- 
+    </ion-list>
+    <label for="">Raw data</label>
+    <textarea name="" id="" cols="30" rows="10">{{rawdata}}</textarea>
+    <label for="">Processed data</label>
+    <textarea name="" id="" cols="30" rows="10">{{data}}</textarea>
 </ion-content>
