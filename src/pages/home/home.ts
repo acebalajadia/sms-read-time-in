@@ -35,6 +35,10 @@ export class HomePage {
         loading.dismiss();
     } 
 
+    generateReport(){
+        this.ReadSMSList();
+    }
+
     generateLeg1Report() {
         var mobile = '+639178523162';
         this.ReadSMSList(mobile);
