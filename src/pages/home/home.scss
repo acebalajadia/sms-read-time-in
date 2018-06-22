@@ -2,11 +2,55 @@ page-home {
     textarea {
         width: 100%;
     }
-    .item-md h2 {
-        text-transform: uppercase;
-        font-weight: bold;
+    .list-header-md {
+        background-color: #efefef;
+        h1 {
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        h2 {
+            font-weight: bold;
+        }
+        .time-stat {
+            position: relative;
+            padding: 5px 0; 
+            margin-bottom: 5px;
+            font-weight: bold;
+            span{
+                position: relative;
+            }
+        }
+        .early {
+            .background {
+                background-color: color($colors, secondary);
+            }
+        }
+        .late {
+            .background {
+                background-color: color($colors, danger);
+            }
+        }
+        .ot {
+            .background {
+                background-color: color($colors, primary);
+            }
+        }
+        .background {
+            margin-left: 100px;
+            // width: calc(50%);
+            width: 0;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0; // width: 0;
+            height: 100%;
+            // z-index: 1;
+        }
     }
-    .swiper-container{
+    .item-md h2 {
+        text-transform: uppercase; // font-weight: bold;
+    }
+    .swiper-container {
         overflow: auto;
     }
 }

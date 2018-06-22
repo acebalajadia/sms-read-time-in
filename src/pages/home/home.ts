@@ -11,17 +11,19 @@ import * as $ from 'jquery'
 
 export class HomePage {
 
-    reportGenerated=false;
+    reportGenerated = false;
     data;
     rawdata;
     messages: any = [];
     // timelogs: any = JSON.parse('[{"branch":"leg1","address":"(0917) 852 5794","activity":"IN","name":"jer0me","date":"6/22/2018 15:13","early":0,"late":13,"overtime":0,"justification":""},{"branch":"","address":"+639175517548","activity":"IN","name":"in:eman","date":"6/22/2018 15:4","early":0,"late":4,"overtime":0,"justification":""},{"branch":"","address":"+639178523162","activity":"IN","name":"angelo","date":"6/22/2018 14:14","early":46,"late":0,"overtime":0,"justification":""},{"branch":"","address":"+639178523162","activity":"OUT","name":"angelo","date":"6/22/2018 11:33","early":0,"late":0,"overtime":0,"justification":""},{"branch":"","address":"(0917) 852 5794","activity":"OUT","name":"jer0me","date":"6/22/2018 11:7","early":0,"late":0,"overtime":0,"justification":""},{"branch":"","address":"+639175517548","activity":"OUT","name":"out:eman","date":"6/22/2018 11:4","early":0,"late":0,"overtime":0,"justification":""},{"branch":"","address":"+63 917 533 0584","activity":"IN","name":":mark","date":"6/22/2018 9:53","early":7,"late":0,"overtime":0,"justification":""},{"branch":"","address":"+63 917 533 0854","activity":"IN","name":"ericson","date":"6/22/2018 9:51","early":9,"late":0,"overtime":0,"justification":""},{"branch":"","address":"(0917) 852 5794","activity":"IN","name":"ems","date":"6/22/2018 9:46","early":14,"late":0,"overtime":0,"justification":""},{"branch":"","address":"+639175517548","activity":"IN","name":"timein:ben","date":"6/22/2018 8:9","early":0,"late":9,"overtime":0,"justification":""},{"branch":"","address":"+639178523162","activity":"IN","name":"bham","date":"6/22/2018 7:57","early":3,"late":0,"overtime":0,"justification":""},{"branch":"","address":"+63 917 533 0584","activity":"IN","name":"in:erics0n","date":"6/22/2018 7:49","early":11,"late":0,"overtime":0,"justification":""},{"branch":"","address":"(0917) 852 5794","activity":"IN","name":"jer0me","date":"6/22/2018 7:37","early":0,"late":37,"overtime":0,"justification":"Arrived 656 in store but opening rider arrived 736."},{"branch":"","address":"+63 917 533 0854","activity":"IN","name":"chano","date":"6/22/2018 7:22","early":0,"late":22,"overtime":0,"justification":""},{"branch":"","address":"(0917) 852 5794","activity":"IN","name":"jeff","date":"6/22/2018 7:18","early":0,"late":18,"overtime":0,"justification":""},{"branch":"","address":"+63 917 838 5603","activity":"IN","name":"bryan","date":"6/22/2018 7:15","early":0,"late":15,"overtime":0,"justification":""},{"branch":"","address":"+63 917 533 0584","activity":"IN","name":":mark","date":"6/22/2018 7:11","early":0,"late":11,"overtime":0,"justification":""},{"branch":"","address":"+63 917 533 0584","activity":"IN","name":":RR","date":"6/22/2018 7:10","early":0,"late":10,"overtime":0,"justification":""},{"branch":"","address":"+63 917 838 5603","activity":"IN","name":"chan","date":"6/22/2018 7:10","early":0,"late":10,"overtime":0,"justification":""},{"branch":"","address":"+639175517548","activity":"IN","name":"in:eman","date":"6/22/2018 7:9","early":0,"late":9,"overtime":0,"justification":""},{"branch":"","address":"+63 917 533 0854","activity":"IN","name":"in:paul","date":"6/22/2018 6:59","early":1,"late":0,"overtime":0,"justification":""},{"branch":"","address":"+639175517548","activity":"IN","name":"js0n","date":"6/22/2018 6:43","early":17,"late":0,"overtime":0,"justification":""},{"branch":"","address":"+639178523162","activity":"IN","name":"b0t/angelo","date":"6/22/2018 6:22","early":38,"late":0,"overtime":0,"justification":""},{"branch":"","address":"(0917) 852 5794","activity":"OUT","name":"jeff","date":"6/21/2018 20:8","early":0,"late":0,"overtime":0,"justification":""},{"branch":"","address":"(0917) 852 5794","activity":"OUT","name":"cris","date":"6/21/2018 19:56","early":0,"late":0,"overtime":56,"justification":""},{"branch":"","address":"+639175517548","activity":"OUT","name":"angelo","date":"6/21/2018 19:50","early":0,"late":0,"overtime":50,"justification":""},{"branch":"","address":"+639175517548","activity":"OUT","name":"timeout:ben","date":"6/21/2018 19:28","early":0,"late":0,"overtime":28,"justification":""} ]');
     timelogs: any = [];
+    summaryReport: any = [];
+    uniqueUsers: any = [];
 
     constructor(public platform: Platform, public androidPermissions: AndroidPermissions, private loadingCtrl: LoadingController) {
         //this.checkPermission()
     }
-    
+
     getData() {
         const loading = this.loadingCtrl.create();
         loading.present();
@@ -29,15 +31,15 @@ export class HomePage {
         // this.ReadSMSList();
 
         //for testing only
-        let smsdata = [{"_id":11110,"thread_id":9,"address":"(0917) 852 5794","date":1529651614288,"date_sent":1529651611000,"read":0,"status":-1,"type":1,"body":"Time in jer0me","service_center":"+639170000299","locked":0,"sub_id":3,"error_code":0,"creator":"com.textra","seen":0,"priority":-1},{"_id":11109,"thread_id":11,"address":"+639175517548","date":1529651100969,"date_sent":1529651098000,"read":0,"status":-1,"type":1,"body":"time in:eman","service_center":"+639170000299","locked":0,"sub_id":3,"error_code":0,"creator":"com.textra","seen":0,"priority":-1},{"_id":11108,"thread_id":8,"address":"+639178523162","date":1529648070917,"date_sent":1529648063000,"read":1,"status":-1,"type":1,"body":"Time in angelo ","service_center":"+639170000299","locked":0,"sub_id":3,"error_code":0,"creator":"com.textra","seen":0,"priority":-1},{"_id":11104,"thread_id":8,"address":"+639178523162","date":1529638400449,"date_sent":1529638398000,"read":1,"status":-1,"type":1,"body":"Time out angelo ","service_center":"+639170000299","locked":0,"sub_id":3,"error_code":0,"creator":"com.textra","seen":0,"priority":-1},{"_id":11103,"thread_id":9,"address":"(0917) 852 5794","date":1529636825533,"date_sent":1529636823000,"read":1,"status":-1,"type":1,"body":"Time 0ut jer0me","service_center":"+639170000299","locked":0,"sub_id":3,"error_code":0,"creator":"com.textra","seen":0,"priority":-1},{"_id":11102,"thread_id":11,"address":"+639175517548","date":1529636655079,"date_sent":1529636652000,"read":1,"status":-1,"type":1,"body":"time out:eman","service_center":"+639170000299","locked":0,"sub_id":3,"error_code":0,"creator":"com.textra","seen":0,"priority":-1},{"_id":11094,"thread_id":10,"address":"+63 917 533 0584","date":1529632687678,"date_sent":1529632399000,"read":1,"status":-1,"type":1,"body":"TIME IN :mark  ","service_center":"+639170000299","locked":0,"sub_id":3,"error_code":0,"creator":"com.textra","seen":0,"priority":-1},{"_id":11093,"thread_id":254,"address":"+63 917 533 0854","date":1529632682483,"date_sent":1529632319000,"read":1,"status":-1,"type":1,"body":"Time in ericson","service_center":"+639170000299","locked":0,"sub_id":3,"error_code":0,"creator":"com.textra","seen":0,"priority":-1},{"_id":11092,"thread_id":9,"address":"(0917) 852 5794","date":1529632115549,"date_sent":1529631995000,"read":1,"status":-1,"type":1,"body":"Time in ems","service_center":"+639170000299","locked":0,"sub_id":3,"error_code":0,"creator":"com.textra","seen":0,"priority":-1},{"_id":11091,"thread_id":11,"address":"+639175517548","date":1529631316184,"date_sent":1529626161000,"read":1,"status":-1,"type":1,"body":"timein:ben","service_center":"+639170000299","locked":0,"sub_id":3,"error_code":0,"creator":"com.textra","seen":0,"priority":-1},{"_id":11090,"thread_id":8,"address":"+639178523162","date":1529631315783,"date_sent":1529625460000,"read":1,"status":-1,"type":1,"body":"Time in bham","service_center":"+639170000299","locked":0,"sub_id":3,"error_code":0,"creator":"com.textra","seen":0,"priority":-1},{"_id":11089,"thread_id":10,"address":"+63 917 533 0584","date":1529631315331,"date_sent":1529624964000,"read":1,"status":-1,"type":1,"body":"Time in:erics0n ","service_center":"+639170000299","locked":0,"sub_id":3,"error_code":0,"creator":"com.textra","seen":0,"priority":-1},{"_id":11088,"thread_id":9,"address":"(0917) 852 5794","date":1529631314957,"date_sent":1529624244000,"read":1,"status":-1,"type":1,"body":"TIME IN: jer0me\nJustification: Arrived 656 in store but opening rider arrived 736. ","service_center":"+639170000299","locked":0,"sub_id":3,"error_code":0,"creator":"com.textra","seen":0,"priority":-1},{"_id":11087,"thread_id":254,"address":"+63 917 533 0854","date":1529631314665,"date_sent":1529623326000,"read":1,"status":-1,"type":1,"body":"Time in chano","service_center":"+639170000299","locked":0,"sub_id":3,"error_code":0,"creator":"com.textra","seen":0,"priority":-1},{"_id":11086,"thread_id":9,"address":"(0917) 852 5794","date":1529631314242,"date_sent":1529623114000,"read":1,"status":-1,"type":1,"body":"Time in jeff","service_center":"+639170000299","locked":0,"sub_id":3,"error_code":0,"creator":"com.textra","seen":0,"priority":-1}];
+        let smsdata = [{ "_id": 11110, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529651614288, "date_sent": 1529651611000, "read": 0, "status": -1, "type": 1, "body": "Time in jer0me", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11109, "thread_id": 11, "address": "+639175517548", "date": 1529651100969, "date_sent": 1529651098000, "read": 0, "status": -1, "type": 1, "body": "time in:eman", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11108, "thread_id": 8, "address": "+639178523162", "date": 1529648070917, "date_sent": 1529648063000, "read": 1, "status": -1, "type": 1, "body": "Time in angelo ", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11104, "thread_id": 8, "address": "+639178523162", "date": 1529638400449, "date_sent": 1529638398000, "read": 1, "status": -1, "type": 1, "body": "Time out angelo ", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11103, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529636825533, "date_sent": 1529636823000, "read": 1, "status": -1, "type": 1, "body": "Time 0ut jer0me", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11102, "thread_id": 11, "address": "+639175517548", "date": 1529636655079, "date_sent": 1529636652000, "read": 1, "status": -1, "type": 1, "body": "time out:eman", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11094, "thread_id": 10, "address": "+63 917 533 0584", "date": 1529632687678, "date_sent": 1529632399000, "read": 1, "status": -1, "type": 1, "body": "TIME IN :mark  ", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11093, "thread_id": 254, "address": "+63 917 533 0854", "date": 1529632682483, "date_sent": 1529632319000, "read": 1, "status": -1, "type": 1, "body": "Time in ericson", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11092, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529632115549, "date_sent": 1529631995000, "read": 1, "status": -1, "type": 1, "body": "Time in ems", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11091, "thread_id": 11, "address": "+639175517548", "date": 1529631316184, "date_sent": 1529626161000, "read": 1, "status": -1, "type": 1, "body": "timein:ben", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11090, "thread_id": 8, "address": "+639178523162", "date": 1529631315783, "date_sent": 1529625460000, "read": 1, "status": -1, "type": 1, "body": "Time in bham", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11089, "thread_id": 10, "address": "+63 917 533 0584", "date": 1529631315331, "date_sent": 1529624964000, "read": 1, "status": -1, "type": 1, "body": "Time in:erics0n ", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11088, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529631314957, "date_sent": 1529624244000, "read": 1, "status": -1, "type": 1, "body": "TIME IN: jer0me\nJustification: Arrived 656 in store but opening rider arrived 736. ", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11087, "thread_id": 254, "address": "+63 917 533 0854", "date": 1529631314665, "date_sent": 1529623326000, "read": 1, "status": -1, "type": 1, "body": "Time in chano", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11086, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529631314242, "date_sent": 1529623114000, "read": 1, "status": -1, "type": 1, "body": "Time in jeff", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }];
 
         this.processSMS(smsdata);
-      
+
         this.reportGenerated = true;
         loading.dismiss();
-    } 
+    }
 
-    generateReport(){
+    generateReport() {
         this.ReadSMSList();
     }
 
@@ -118,8 +120,7 @@ export class HomePage {
         });
     }
 
-    processSMS(smsdata){
-
+    processSMS(smsdata) {
         var result = $.map(smsdata, function (item, i) {
 
             var date = new Date(item.date_sent);
@@ -145,14 +146,14 @@ export class HomePage {
 
             //get name
             var msg = '';
-            let filteredMsg = item.body.replace('-',' ').replace(':',' ').trim();
+            let filteredMsg = item.body.replace('-', ' ').replace(':', ' ').trim();
             if (item.body.toLowerCase().indexOf('justification') > 0) {
                 msg = filteredMsg.substr(0, filteredMsg.toLowerCase().indexOf('justification')).split(' ');
             }
             else {
                 msg = filteredMsg.split(' ');
             }
-            var name = msg[msg.length - 1];
+            var name = msg[msg.length - 1].trim();
 
             //get justification
             var justification = '';
@@ -244,6 +245,12 @@ export class HomePage {
                     break;
             }
 
+
+
+            //sum up status
+
+
+
             return {
                 branch: branch,
                 address: item.address,
@@ -253,17 +260,52 @@ export class HomePage {
                 early: early,
                 late: late,
                 overtime: overtime,
-                sched: sched.getHours()+'00',
+                sched: sched.getHours() + '00',
                 justification: justification
             };
         });
 
         this.rawdata = JSON.stringify(smsdata)
-        this.data = JSON.stringify(result);
-
+        this.data = JSON.stringify(result); //process data
         this.timelogs = result;
 
-        
-    }
+        //save unique users 
+        result.forEach(item => {
+            let exists = false;
+            this.uniqueUsers.forEach(element => {
+                if (item.name == element.name) {
+                    //don't insert
+                    exists = true;
+                    return;
+                }
+            });
+            console.log('exists : ' + exists + ' '+ item.name);
+            if (!exists){
+                console.log('insert : ' + item.name);
+                this.uniqueUsers.push({
+                    branch: item.branch,
+                    address: item.address, 
+                    name: item.name, 
+                    early: 0,
+                    late: 0,
+                    overtime: 0,
+                    timelogs:[]
+                });
+            }
+        });
+        console.log(JSON.stringify(this.uniqueUsers));
 
+        //sum up
+        this.uniqueUsers.forEach(item => {
+            result.forEach(element => {
+                if(item.name == element.name){
+                    item.early += element.early;
+                    item.late += element.late;
+                    item.overtime += element.overtime;
+                    item.timelogs.push(element);
+                }
+            }); 
+        });
+
+    } 
 }

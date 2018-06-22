@@ -19,40 +19,70 @@
     <button ion-button color="danger" (click)="generateLigaoReport()">Ligao</button>
 
     <div class="report-generated" *ngIf="reportGenerated">
-    <br>
-    <h3>Summary</h3>
+        <br>
+        <h3>Details</h3>
+        <ion-list *ngFor="let user of uniqueUsers">
+            <ion-list-header>
+                <h1>{{user.name}} </h1>
+                <h2>{{user.branch}}</h2>
+                <div class="time-stat early"><div class="background" [style.width]="user.early+'%'"></div><span>Early {{user.early}}m</span> </div>
+                <div class="time-stat late"><div class="background" [style.width]="user.late+'%'"></div><span>Late {{user.late}}m</span> </div>
+                <div class="time-stat ot"><div class="background" [style.width]="user.overtime+'%'"></div><span>OT {{user.overtime}}m</span></div>
+            </ion-list-header>
+            <ion-item *ngFor="let item of user.timelogs">
+                <h2>{{item.name}} </h2>
+                <h3>{{item.date}}</h3>
+                <h4 *ngIf="item.activity == 'IN'">Sched:{{item.sched}}</h4>
+            
+                <ion-badge>{{item.branch}}</ion-badge>
+                <ion-badge [color]="item.activity == 'IN' ? 'secondary' : 'dark'">{{item.activity}}</ion-badge>
+            
+                <ion-badge *ngIf="item.early" color="secondary" item-end>Early {{item.early}}m for {{item.sched}}</ion-badge>
+                <ion-badge *ngIf="item.late" color="danger" item-end>Late {{item.late}}m after {{item.sched}}</ion-badge>
+                <ion-badge *ngIf="item.overtime" item-end>OT {{item.overtime}}m</ion-badge>
+                <p *ngIf="item.justification">{{item.justification}}</p>
+            </ion-item>
+        </ion-list>
+        <!-- <ion-list no-padding>
+            <ion-item *ngFor="let item of uniqueUsers" no-padding>
+                <h2>{{item.name}} </h2> 
+                <ion-badge>{{item.branch}}</ion-badge> 
+                <p color="secondary" >Early {{item.early}}m</p>
+                <p color="danger" >Late {{item.late}}m </p>
+                <p>OT {{item.overtime}}m</p>
+            </ion-item>
+        </ion-list>
+        <hr> -->
+        <!-- <h3>Details</h3>
 
-    <hr>
-    <h3>Details</h3>
+        <ion-list no-padding>
+            <ion-item *ngFor="let item of timelogs" no-padding>
+                <h2>{{item.name}} </h2>
+                <h3>{{item.date}}</h3>
+                <h4 *ngIf="item.activity == 'IN'">Sched:{{item.sched}}</h4>
 
-    <ion-list no-padding>
-        <ion-item *ngFor="let item of timelogs" no-padding>
-            <h2>{{item.name}} </h2>
-            <h3>{{item.date}}</h3>
-            <h4 *ngIf="item.activity == 'IN'">Sched:{{item.sched}}</h4>
-    
-            <ion-badge>{{item.branch}}</ion-badge>
-            <ion-badge [color]="item.activity == 'IN' ? 'secondary' : 'dark'">{{item.activity}}</ion-badge>
-    
-            <ion-badge *ngIf="item.early" color="secondary" item-end>Early {{item.early}}m for {{item.sched}}</ion-badge>
-            <ion-badge *ngIf="item.late" color="danger" item-end>Late {{item.late}}m after {{item.sched}}</ion-badge>
-            <ion-badge *ngIf="item.overtime" item-end>OT {{item.overtime}}m</ion-badge>
-            <p *ngIf="item.justification">{{item.justification}}</p>
-        </ion-item>
-    </ion-list> 
-    <hr>
-    <accordion>
-        <accordion-item>
-            <accordion-heading>
-                Raw data
-            </accordion-heading>
-            <accordion-content>
-                <label for="">Raw data</label>
-                <textarea name="" id="" cols="30" rows="10">{{rawdata}}</textarea>
-                <label for="">Processed data</label>
-                <textarea name="" id="" cols="30" rows="10">{{data}}</textarea>
-            </accordion-content>
-        </accordion-item>
-    </accordion>
+                <ion-badge>{{item.branch}}</ion-badge>
+                <ion-badge [color]="item.activity == 'IN' ? 'secondary' : 'dark'">{{item.activity}}</ion-badge>
+
+                <ion-badge *ngIf="item.early" color="secondary" item-end>Early {{item.early}}m for {{item.sched}}</ion-badge>
+                <ion-badge *ngIf="item.late" color="danger" item-end>Late {{item.late}}m after {{item.sched}}</ion-badge>
+                <ion-badge *ngIf="item.overtime" item-end>OT {{item.overtime}}m</ion-badge>
+                <p *ngIf="item.justification">{{item.justification}}</p>
+            </ion-item>
+        </ion-list>
+        <hr> -->
+        <accordion>
+            <accordion-item>
+                <accordion-heading>
+                    Raw data
+                </accordion-heading>
+                <accordion-content>
+                    <label for="">Raw data</label>
+                    <textarea name="" id="" cols="30" rows="10">{{rawdata}}</textarea>
+                    <label for="">Processed data</label>
+                    <textarea name="" id="" cols="30" rows="10">{{data}}</textarea>
+                </accordion-content>
+            </accordion-item>
+        </accordion>
     </div>
 </ion-content>

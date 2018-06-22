@@ -1,0 +1,11 @@
+accordion-content {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    max-height: 0;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    .accordion-content {
+        // padding: 2.3rem 2.3rem 2.3rem 3rem;
+    }
+}

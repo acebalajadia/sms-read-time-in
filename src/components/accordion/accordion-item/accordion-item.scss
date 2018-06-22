@@ -1,0 +1,18 @@
+accordion-item {
+    border-bottom: 1px solid color($colors, light);
+    display: block;
+    [name="ios-arrow-up"] {
+        display: none;
+    }
+    .accordion-item.open {
+        accordion-content {
+            max-height: 1000rem;
+        }
+        [name="ios-arrow-down"] {
+            display: none;
+        }
+        [name="ios-arrow-up"] {
+            display: block;
+        }
+    }
+}
