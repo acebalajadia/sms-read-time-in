@@ -7,36 +7,52 @@
 </ion-header>
 
 <ion-content padding>
+
+    <h3>Generate report</h3>
     <button ion-button color="danger" (click)="getData()">Get Data (hard coded test data)</button>
-    <button ion-button color="danger" (click)="generateReport()">All Report</button>
-    <button ion-button color="danger" (click)="generateLeg1Report()">Leg1 Report</button>
-    <button ion-button color="danger" (click)="generateLeg2Report()">Leg2 Report</button>
-    <button ion-button color="danger" (click)="generateDrgReport()">Daraga Report</button>
-    <button ion-button color="danger" (click)="generateOasReport()">Oas Report</button>
-    <button ion-button color="danger" (click)="generateGuinobatanReport()">Guinobatan Report</button>
-    <button ion-button color="danger" (click)="generateLigaoReport()">Ligao Report</button>
+    <button ion-button color="danger" (click)="generateReport()">All</button>
+    <button ion-button color="danger" (click)="generateLeg1Report()">Leg1</button>
+    <button ion-button color="danger" (click)="generateLeg2Report()">Leg2</button>
+    <button ion-button color="danger" (click)="generateDrgReport()">Daraga</button>
+    <button ion-button color="danger" (click)="generateOasReport()">Oas</button>
+    <button ion-button color="danger" (click)="generateGuinobatanReport()">Guinobatan</button>
+    <button ion-button color="danger" (click)="generateLigaoReport()">Ligao</button>
+
+    <div class="report-generated" *ngIf="reportGenerated">
+    <br>
+    <h3>Summary</h3>
+
+    <hr>
+    <h3>Details</h3>
 
     <ion-list no-padding>
-        <ion-item *ngFor="let item of timelogs"  no-padding> 
-            <!-- 
-            <ion-avatar item-start>
-                <img src="/assets/imgs/logo.png">
-            </ion-avatar> -->
+        <ion-item *ngFor="let item of timelogs" no-padding>
             <h2>{{item.name}} </h2>
             <h3>{{item.date}}</h3>
             <h4 *ngIf="item.activity == 'IN'">Sched:{{item.sched}}</h4>
-
+    
             <ion-badge>{{item.branch}}</ion-badge>
-            <ion-badge [color]="item.activity == 'IN' ? 'secondary' : 'dark'">{{item.activity}}</ion-badge> 
-
+            <ion-badge [color]="item.activity == 'IN' ? 'secondary' : 'dark'">{{item.activity}}</ion-badge>
+    
             <ion-badge *ngIf="item.early" color="secondary" item-end>Early {{item.early}}m for {{item.sched}}</ion-badge>
             <ion-badge *ngIf="item.late" color="danger" item-end>Late {{item.late}}m after {{item.sched}}</ion-badge>
             <ion-badge *ngIf="item.overtime" item-end>OT {{item.overtime}}m</ion-badge>
             <p *ngIf="item.justification">{{item.justification}}</p>
         </ion-item>
-    </ion-list>
-    <label for="">Raw data</label>
-    <textarea name="" id="" cols="30" rows="10">{{rawdata}}</textarea>
-    <label for="">Processed data</label>
-    <textarea name="" id="" cols="30" rows="10">{{data}}</textarea>
+    </ion-list> 
+    <hr>
+    <accordion>
+        <accordion-item>
+            <accordion-heading>
+                Raw data
+            </accordion-heading>
+            <accordion-content>
+                <label for="">Raw data</label>
+                <textarea name="" id="" cols="30" rows="10">{{rawdata}}</textarea>
+                <label for="">Processed data</label>
+                <textarea name="" id="" cols="30" rows="10">{{data}}</textarea>
+            </accordion-content>
+        </accordion-item>
+    </accordion>
+    </div>
 </ion-content>

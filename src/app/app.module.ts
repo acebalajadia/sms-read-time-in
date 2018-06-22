@@ -1,3 +1,4 @@
+import { ComponentsModule } from './../components/components.module';
 import { FirstCapsPipe } from './../pipes/first-caps/first-caps';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -18,7 +19,8 @@ import { AndroidPermissions  } from "@ionic-native/android-permissions";
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

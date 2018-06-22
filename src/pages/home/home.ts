@@ -11,6 +11,7 @@ import * as $ from 'jquery'
 
 export class HomePage {
 
+    reportGenerated=false;
     data;
     rawdata;
     messages: any = [];
@@ -32,6 +33,7 @@ export class HomePage {
 
         this.processSMS(smsdata);
       
+        this.reportGenerated = true;
         loading.dismiss();
     } 
 
