@@ -146,7 +146,7 @@ export class HomePage {
 
             //get name
             var msg = '';
-            let filteredMsg = item.body.replace('-', ' ').replace(':', ' ').trim();
+            let filteredMsg = item.body.replace('-', ' ').replace(':', ' ').replace('', ' ').replace('"', ' ').replace('.', ' ').replace('~', ' ').trim();
             if (item.body.toLowerCase().indexOf('justification') > 0) {
                 msg = filteredMsg.substr(0, filteredMsg.toLowerCase().indexOf('justification')).split(' ');
             }
@@ -256,7 +256,8 @@ export class HomePage {
                 address: item.address,
                 activity: activity,
                 name: name,
-                date: fulldatetime,
+                fulldatetime: fulldatetime,
+                date: fulldate,
                 early: early,
                 late: late,
                 overtime: overtime,
@@ -268,6 +269,9 @@ export class HomePage {
         this.rawdata = JSON.stringify(smsdata)
         this.data = JSON.stringify(result); //process data
         this.timelogs = result;
+
+        //reset
+        this.uniqueUsers = [];
 
         //save unique users 
         result.forEach(item => {
@@ -289,6 +293,7 @@ export class HomePage {
                     early: 0,
                     late: 0,
                     overtime: 0,
+                    attendance: 1,
                     timelogs:[]
                 });
             }
@@ -301,9 +306,20 @@ export class HomePage {
                 if(item.name == element.name){
                     item.early += element.early;
                     item.late += element.late;
-                    item.overtime += element.overtime;
+                    item.overtime += element.overtime; 
                     item.timelogs.push(element);
                 }
+            }); 
+        });
+
+        //count attendance
+        this.uniqueUsers.forEach(item => {
+            let dateholder = item.timelogs[0].date;
+            item.timelogs.forEach(element => {
+                if(dateholder!=element.date){
+                    item.attendance += 1;
+                    dateholder = element.date;
+                } 
             }); 
         });
 
