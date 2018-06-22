@@ -1,6 +1,6 @@
 {
   "name": "sms-read-time-in",
-  "app_id": "",
+  "app_id": "77d3f29a",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
