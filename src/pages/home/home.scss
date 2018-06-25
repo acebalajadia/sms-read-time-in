@@ -11,7 +11,7 @@ page-home {
             margin: 0 auto;
             background-position: center;
             background-size: cover;
-        } 
+        }
         h1 {
             text-transform: uppercase;
             font-weight: bold;
@@ -31,11 +31,30 @@ page-home {
             }
         }
         .early {
+            [name="md-star"] {
+                font-size: 30px;
+                margin: 0 3px;
+                color: gold;
+            }
             .background {
                 background-color: color($colors, secondary);
             }
         }
         .late {
+            [name="md-alert"] {
+                font-size: 30px;
+                margin: 0 3px;
+                color: color($colors, danger);
+                animation-name: color_change;
+                animation-duration: 1s;
+                animation-iteration-count: infinite;
+                animation-direction: alternate;
+                -webkit-animation: color_change 1s infinite alternate;
+                -moz-animation: color_change 1s infinite alternate;
+                -ms-animation: color_change 1s infinite alternate;
+                -o-animation: color_change 1s infinite alternate;
+                animation: color_change 1s infinite alternate;
+            }
             .background {
                 background-color: color($colors, danger);
             }
@@ -67,5 +86,50 @@ page-home {
     }
     .swiper-container {
         overflow: auto;
+    }
+}
+
+@-webkit-keyframes color_change {
+    from {
+        color: black;
+    }
+    to {
+        color: color($colors, danger);
+    }
+}
+
+@-moz-keyframes color_change {
+    from {
+        color: black;
+    }
+    to {
+        color: color($colors, danger);
+    }
+}
+
+@-ms-keyframes color_change {
+    from {
+        color: black;
+    }
+    to {
+        color: color($colors, danger);
+    }
+}
+
+@-o-keyframes color_change {
+    from {
+        color: black;
+    }
+    to {
+        color: color($colors, danger);
+    }
+}
+
+@keyframes color_change {
+    from {
+        color: black;
+    }
+    to {
+        color: color($colors, danger);
     }
 }

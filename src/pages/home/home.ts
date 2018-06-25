@@ -20,11 +20,14 @@ export class HomePage {
     timelogs: any = [];
     summaryReport: any = [];
     uniqueUsers: any = [];
+    uniqueUsersRaw: any = [];
 
     constructor(public platform: Platform, public androidPermissions: AndroidPermissions, private loadingCtrl: LoadingController) {
         //this.checkPermission()
     }
-
+    getNumber = function (num) {
+        return new Array(num);
+    }
     // ionViewDidLoad(){
     //     console.log('ionViewDidLoad');
     //     let loading = this.loadingCtrl.create();
@@ -180,6 +183,7 @@ export class HomePage {
             var diffMs = 0;
             var overtime = 0;
 
+
             switch (timeinHours) {
                 case 6:
                     sched = new Date(fulldate + ' ' + '7:00');
@@ -238,18 +242,22 @@ export class HomePage {
                 case '+639178523162':
                     branch = 'leg1';
                     break;
+                case '(0917) 852 5794':
                 case '+639178525794':
                     branch = 'leg2';
                     break;
                 case '+639175517548':
                     branch = 'drg';
                     break;
+                case '+63 917 533 0584':
                 case '+639175330584':
                     branch = 'oas';
                     break;
+                case '+63 917 838 5603':
                 case '+639178385603':
                     branch = 'guinobatan';
                     break;
+                case '+63 917 533 0854':
                 case '+639175330854':
                     branch = 'ligao';
                     break;
@@ -263,7 +271,9 @@ export class HomePage {
                 fulldatetime: fulldatetime,
                 date: fulldate,
                 early: early,
+
                 late: late,
+
                 overtime: overtime,
                 sched: sched.getHours() + '00',
                 justification: justification
@@ -286,7 +296,9 @@ export class HomePage {
                             fulldatetime: element.fulldatetime,
                             date: element.date,
                             early: element.early,
+
                             late: element.late,
+
                             overtime: element.overtime,
                             sched: element.sched,
                             justification: element.justification
@@ -321,7 +333,9 @@ export class HomePage {
                     address: item.address,
                     name: item.name,
                     early: 0,
+                    earlyBird: 0,
                     late: 0,
+                    lateMemo: 0,
                     overtime: 0,
                     attendance: 1,
                     timelogs: []
@@ -355,7 +369,20 @@ export class HomePage {
                     dateholder = element.date;
                 }
             });
+
+            //calculate earlybird reward
+            item.earlyBirdReward = Math.floor(item.late / 200);
+            // item.earlyBirdReward = Math.floor(item.early / 10); // test
+
+            //calculate late memo
+            //threshold attendance 50m
+            item.lateMemo = Math.floor(item.late / 50);
+            // item.lateMemo = Math.floor(item.late / 10); //test
+ 
         });
+
+
+        // this.uniqueUsersRaw = JSON.stringify(this.uniqueUsers);
 
         this.reportGenerated = true;
     }

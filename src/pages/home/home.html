@@ -10,14 +10,14 @@
 
     <h3>Generate report</h3>
     <ion-list>
-    
+
         <ion-item>
             <ion-label floating>Number of sms to read</ion-label>
-            <ion-input type="number" [ngModel]="noOfMsgsToFetch"  (ngModelChange)="noOfMsgsToFetch = $event"></ion-input>
+            <ion-input type="number" [ngModel]="noOfMsgsToFetch" (ngModelChange)="noOfMsgsToFetch = $event"></ion-input>
         </ion-item>
     </ion-list>
-    
-    <!-- <button ion-button color="danger" (click)="getData()">Get Data (hard coded test data)</button> -->
+
+    <button ion-button color="danger" (click)="getData()">Get Data (hard coded test data)</button>
     <button ion-button color="danger" (click)="generateReport()">All</button>
     <button ion-button color="danger" (click)="generateLeg1Report()">Leg1</button>
     <button ion-button color="danger" (click)="generateLeg2Report()">Leg2</button>
@@ -26,36 +26,48 @@
     <button ion-button color="danger" (click)="generateGuinobatanReport()">Guinobatan</button>
     <button ion-button color="danger" (click)="generateLigaoReport()">Ligao</button>
 
- 
+
     <div class="report-generated" *ngIf="reportGenerated">
         <div *ngFor="let user of uniqueUsers">
             <ion-card>
-                <ion-card-content> 
-                     <span> 
+                <ion-card-content>
+                    <!-- <span> 
                         debugging profile pic assets/imgs/{{user.name}}-{{user.branch}}
-                        </span>
+                        </span> -->
                     <div class="avatar" [ngStyle]="{'background-image': 'url(' + 'assets/imgs/'+ user.name+'-'+user.branch+'.png)'}"></div>
                     <ion-card-title>
                         <h1>{{user.name}} </h1>
                         <h2>{{user.branch}}</h2>
+                        <div class="time-stat early" *ngIf="user.earlyBirdReward">
+                            <span>Early bird:
+                                <ion-icon name="md-star" *ngFor="let i of getNumber(user.earlyBirdReward)"></ion-icon>
+                            </span>
+                        </div>
                     </ion-card-title>
                     <div class="time-stat early">
                         <div class="background" [style.width]="user.early+'%'"></div>
                         <span>Early {{user.early}}m</span>
                     </div>
+                    
                     <div class="time-stat late">
                         <div class="background" [style.width]="user.late+'%'"></div>
                         <span>Late {{user.late}}m</span>
                     </div>
+                    <div class="time-stat late" *ngIf="user.lateMemo">
+                        <span>
+                            For memo: <ion-icon name="md-alert" *ngFor="let i of getNumber(user.lateMemo)"></ion-icon>
+                        </span>
+                    </div>
+
                     <div class="time-stat ot">
                         <div class="background" [style.width]="user.overtime+'%'"></div>
                         <span>OT {{user.overtime}}m</span>
                     </div>
                     <div class="time-stat total-attendanace">
                         <span>Total attendance {{user.attendance}}</span>
-                        
+
                     </div>
-                    <div class="time stat date-range"> 
+                    <div class="time stat date-range">
                         <span>Date range {{user.timelogs[0].date}} - {{user.timelogs[user.timelogs.length-1].date}} </span>
                     </div>
                     <accordion>
