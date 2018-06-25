@@ -4,10 +4,12 @@ page-home {
     }
     ion-card {
         background-color: #efefef;
-        ion-avatar img {
+        ion-avatar {
             border-radius: 50%;
-            width: 30%;
+            width: 100px;
+            height: 100px;
             margin: 0 auto;
+            overflow: hidden;
         }
         h1 {
             text-transform: uppercase;
@@ -41,7 +43,7 @@ page-home {
             }
         }
         .background {
-            margin-left: 80px;  
+            margin-left: 80px;
             width: 0;
             display: block;
             position: absolute;

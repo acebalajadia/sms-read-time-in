@@ -11,7 +11,7 @@ import * as $ from 'jquery'
 
 export class HomePage {
 
-    noOfMsgsToFetch = 300;
+    noOfMsgsToFetch = 200;
     reportGenerated = false;
     data;
     rawdata;
@@ -20,7 +20,7 @@ export class HomePage {
     timelogs: any = [];
     summaryReport: any = [];
     uniqueUsers: any = [];
-
+ 
     constructor(public platform: Platform, public androidPermissions: AndroidPermissions, private loadingCtrl: LoadingController) {
         //this.checkPermission()
     }
@@ -154,7 +154,7 @@ export class HomePage {
             else {
                 msg = filteredMsg.split(' ');
             }
-            var name = msg[msg.length - 1].trim();
+            var name = msg[msg.length - 1].replace(/0/gm, 'o').trim();
 
             //get justification
             var justification = '';
@@ -350,4 +350,5 @@ export class HomePage {
 
         this.reportGenerated = true;
     }
+ 
 }

@@ -13,7 +13,7 @@
     
         <ion-item>
             <ion-label floating>Number of sms to read</ion-label>
-            <ion-input type="text" [ngModel]="noOfMsgsToFetch"  (ngModelChange)="noOfMsgsToFetch = $event"></ion-input>
+            <ion-input type="number" [ngModel]="noOfMsgsToFetch"  (ngModelChange)="noOfMsgsToFetch = $event"></ion-input>
         </ion-item>
     </ion-list>
     
@@ -31,9 +31,8 @@
             <ion-card>
                 <ion-card-content>
                     <ion-avatar>
-                        <img src="/assets/imgs/logo.png">
-                    </ion-avatar>
-
+                        <img src="assets/imgs/{{user.name}}-{{user.branch}}.png">
+                    </ion-avatar> 
                     <ion-card-title>
                         <h1>{{user.name}} </h1>
                         <h2>{{user.branch}}</h2>
