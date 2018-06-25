@@ -1,7 +1,7 @@
 <ion-header>
     <ion-navbar>
         <ion-title>
-            LPG Express Time logs
+            LPG Express Time Management
         </ion-title>
     </ion-navbar>
 </ion-header>
@@ -17,7 +17,7 @@
         </ion-item>
     </ion-list>
     
-    <button ion-button color="danger" (click)="getData()">Get Data (hard coded test data)</button>
+    <!-- <button ion-button color="danger" (click)="getData()">Get Data (hard coded test data)</button> -->
     <button ion-button color="danger" (click)="generateReport()">All</button>
     <button ion-button color="danger" (click)="generateLeg1Report()">Leg1</button>
     <button ion-button color="danger" (click)="generateLeg2Report()">Leg2</button>
@@ -26,13 +26,15 @@
     <button ion-button color="danger" (click)="generateGuinobatanReport()">Guinobatan</button>
     <button ion-button color="danger" (click)="generateLigaoReport()">Ligao</button>
 
+ 
     <div class="report-generated" *ngIf="reportGenerated">
         <div *ngFor="let user of uniqueUsers">
             <ion-card>
-                <ion-card-content>
-                    <ion-avatar>
-                        <img src="assets/imgs/{{user.name}}-{{user.branch}}.png">
-                    </ion-avatar> 
+                <ion-card-content> 
+                     <span> 
+                        debugging profile pic assets/imgs/{{user.name}}-{{user.branch}}
+                        </span>
+                    <div class="avatar" [ngStyle]="{'background-image': 'url(' + 'assets/imgs/'+ user.name+'-'+user.branch+'.png)'}"></div>
                     <ion-card-title>
                         <h1>{{user.name}} </h1>
                         <h2>{{user.branch}}</h2>

@@ -20,10 +20,16 @@ export class HomePage {
     timelogs: any = [];
     summaryReport: any = [];
     uniqueUsers: any = [];
- 
+
     constructor(public platform: Platform, public androidPermissions: AndroidPermissions, private loadingCtrl: LoadingController) {
         //this.checkPermission()
     }
+
+    // ionViewDidLoad(){
+    //     console.log('ionViewDidLoad');
+    //     let loading = this.loadingCtrl.create();
+    //     loading.present();
+    // }
 
     getData() {
         const loading = this.loadingCtrl.create();
@@ -41,45 +47,45 @@ export class HomePage {
     }
 
     generateReport() {
-        this.ReadSMSList();
+        this.checkPermission();
     }
 
     generateLeg1Report() {
         var mobile = '+639178523162';
-        this.ReadSMSList(mobile);
+        this.checkPermission(mobile);
     }
     generateLeg2Report() {
-        var mobile = '(0917) 852 5794';
-        this.ReadSMSList(mobile);
+        var mobile = '+639178525794';
+        this.checkPermission(mobile);
     }
     generateDrgReport() {
         var mobile = '+639175517548';
-        this.ReadSMSList(mobile);
+        this.checkPermission(mobile);
     }
     generateOasReport() {
-        var mobile = '+63 917 533 0584';
-        this.ReadSMSList(mobile);
+        var mobile = '+639175330584';
+        this.checkPermission(mobile);
     }
     generateGuinobatanReport() {
-        var mobile = '+63 917 838 5603';
-        this.ReadSMSList(mobile);
+        var mobile = '+639178385603';
+        this.checkPermission(mobile);
     }
     generateLigaoReport() {
-        var mobile = '+63 917 533 0854';
-        this.ReadSMSList(mobile);
+        var mobile = '+639175330854';
+        this.checkPermission(mobile);
     }
-    checkPermission() {
+    checkPermission(mobile = '') {
         this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_SMS).then(
             success => {
 
                 //if permission granted
-                this.ReadSMSList();
+                this.ReadSMSList(mobile);
             },
             err => {
 
                 this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.READ_SMS).
                     then(success => {
-                        this.ReadSMSList();
+                        this.ReadSMSList(mobile);
                     },
                         err => {
                             alert("cancelled")
@@ -93,31 +99,34 @@ export class HomePage {
 
         this.platform.ready().then((readySource) => {
             const loading = this.loadingCtrl.create();
-            loading.present();
+            loading.present().then(() => {
 
-            let filter = {
-                box: 'inbox', // 'inbox' (default), 'sent', 'draft'
-                indexFrom: 0, // start from index 0
-                maxCount: this.noOfMsgsToFetch, // count of SMS to return each time
-                address: mobile,
-            };
 
-            if (SMS) SMS.listSMS(filter, (ListSms) => {
-                this.messages = ListSms;
 
-                var smsdata = ListSms.filter(function (item) {
-                    return (item.body.toLowerCase().substr(0, 4) == 'time');
-                });
+                let filter = {
+                    box: 'inbox', // 'inbox' (default), 'sent', 'draft'
+                    indexFrom: 0, // start from index 0
+                    maxCount: this.noOfMsgsToFetch, // count of SMS to return each time
+                    address: mobile,
+                };
 
-                this.processSMS(smsdata);
+                if (SMS) SMS.listSMS(filter, (ListSms) => {
+                    this.messages = ListSms;
 
-            },
+                    var smsdata = ListSms.filter(function (item) {
+                        return (item.body.toLowerCase().substr(0, 4) == 'time');
+                    });
 
-                Error => {
-                    alert(JSON.stringify(Error))
-                });
+                    this.processSMS(smsdata);
 
-            loading.dismiss();
+                },
+
+                    Error => {
+                        alert(JSON.stringify(Error))
+                    });
+
+                loading.dismiss();
+            });
         });
     }
 
@@ -154,7 +163,7 @@ export class HomePage {
             else {
                 msg = filteredMsg.split(' ');
             }
-            var name = msg[msg.length - 1].replace(/0/gm, 'o').trim();
+            var name = msg[msg.length - 1].replace(/0/gm, 'o').trim().toLowerCase();
 
             //get justification
             var justification = '';
@@ -227,22 +236,22 @@ export class HomePage {
             var branch = '';
             switch (item.address) {
                 case '+639178523162':
-                    branch = 'Leg1';
+                    branch = 'leg1';
                     break;
-                case '(0917) 852 5794':
-                    branch = 'Leg2';
+                case '+639178525794':
+                    branch = 'leg2';
                     break;
                 case '+639175517548':
-                    branch = 'Drg';
+                    branch = 'drg';
                     break;
-                case '+63 917 533 0584':
-                    branch = 'Oas';
+                case '+639175330584':
+                    branch = 'oas';
                     break;
-                case '+63 917 838 5603':
-                    branch = 'Guinobatan';
+                case '+639178385603':
+                    branch = 'guinobatan';
                     break;
-                case '+63 917 533 0854':
-                    branch = 'Ligao';
+                case '+639175330854':
+                    branch = 'ligao';
                     break;
             }
 
@@ -350,5 +359,5 @@ export class HomePage {
 
         this.reportGenerated = true;
     }
- 
+
 }
