@@ -9,6 +9,14 @@
 <ion-content padding>
 
     <h3>Generate report</h3>
+    <ion-list>
+    
+        <ion-item>
+            <ion-label floating>Number of sms to read</ion-label>
+            <ion-input type="text" [ngModel]="noOfMsgsToFetch"  (ngModelChange)="noOfMsgsToFetch = $event"></ion-input>
+        </ion-item>
+    </ion-list>
+    
     <button ion-button color="danger" (click)="getData()">Get Data (hard coded test data)</button>
     <button ion-button color="danger" (click)="generateReport()">All</button>
     <button ion-button color="danger" (click)="generateLeg1Report()">Leg1</button>
@@ -19,43 +27,63 @@
     <button ion-button color="danger" (click)="generateLigaoReport()">Ligao</button>
 
     <div class="report-generated" *ngIf="reportGenerated">
-        <br>
-        <h3>Details</h3>
-        <ion-list *ngFor="let user of uniqueUsers">
-            <ion-list-header>
-                <h1>{{user.name}} </h1>
-                <h2>{{user.branch}}</h2>
-                <div class="time-stat early">
-                    <div class="background" [style.width]="user.early+'%'"></div>
-                    <span>Early {{user.early}}m</span>
-                </div>
-                <div class="time-stat late">
-                    <div class="background" [style.width]="user.late+'%'"></div>
-                    <span>Late {{user.late}}m</span>
-                </div>
-                <div class="time-stat ot">
-                    <div class="background" [style.width]="user.overtime+'%'"></div>
-                    <span>OT {{user.overtime}}m</span>
-                </div>
-                <div class="time-stat total-attendanace"> 
-                    <span>Total attendance {{user.attendance}}</span>
-                    <span>Date range: {{user.timelogs[0].date}} - {{user.timelogs[user.timelogs.length-1].date}} </span>
-                </div>
-            </ion-list-header>
-            <ion-item *ngFor="let item of user.timelogs">
-                <h2>{{item.name}} </h2>
-                <h3>{{item.fulldatetime}}</h3>
-                <h4 *ngIf="item.activity == 'IN'">Sched:{{item.sched}}</h4>
+        <div *ngFor="let user of uniqueUsers">
+            <ion-card>
+                <ion-card-content>
+                    <ion-avatar>
+                        <img src="/assets/imgs/logo.png">
+                    </ion-avatar>
 
-                <ion-badge>{{item.branch}}</ion-badge>
-                <ion-badge [color]="item.activity == 'IN' ? 'secondary' : 'dark'">{{item.activity}}</ion-badge>
+                    <ion-card-title>
+                        <h1>{{user.name}} </h1>
+                        <h2>{{user.branch}}</h2>
+                    </ion-card-title>
+                    <div class="time-stat early">
+                        <div class="background" [style.width]="user.early+'%'"></div>
+                        <span>Early {{user.early}}m</span>
+                    </div>
+                    <div class="time-stat late">
+                        <div class="background" [style.width]="user.late+'%'"></div>
+                        <span>Late {{user.late}}m</span>
+                    </div>
+                    <div class="time-stat ot">
+                        <div class="background" [style.width]="user.overtime+'%'"></div>
+                        <span>OT {{user.overtime}}m</span>
+                    </div>
+                    <div class="time-stat total-attendanace">
+                        <span>Total attendance {{user.attendance}}</span>
+                        
+                    </div>
+                    <div class="time stat date-range"> 
+                        <span>Date range {{user.timelogs[0].date}} - {{user.timelogs[user.timelogs.length-1].date}} </span>
+                    </div>
+                    <accordion>
+                        <accordion-item>
+                            <accordion-heading>More details...</accordion-heading>
+                            <accordion-content>
+                                <ion-list>
+                                    <ion-item *ngFor="let item of user.timelogs">
+                                        <h2>{{item.name}} </h2>
+                                        <h3>{{item.fulldatetime}}</h3>
+                                        <h4 *ngIf="item.activity == 'IN'">Sched:{{item.sched}}</h4>
 
-                <ion-badge *ngIf="item.early" color="secondary" item-end>Early {{item.early}}m for {{item.sched}}</ion-badge>
-                <ion-badge *ngIf="item.late" color="danger" item-end>Late {{item.late}}m after {{item.sched}}</ion-badge>
-                <ion-badge *ngIf="item.overtime" item-end>OT {{item.overtime}}m</ion-badge>
-                <p *ngIf="item.justification">{{item.justification}}</p>
-            </ion-item>
-        </ion-list>
+                                        <ion-badge>{{item.branch}}</ion-badge>
+                                        <ion-badge [color]="item.activity == 'IN' ? 'secondary' : 'dark'">{{item.activity}}</ion-badge>
+
+                                        <ion-badge *ngIf="item.early" color="secondary" item-end>Early {{item.early}}m for {{item.sched}}</ion-badge>
+                                        <ion-badge *ngIf="item.late" color="danger" item-end>Late {{item.late}}m after {{item.sched}}</ion-badge>
+                                        <ion-badge *ngIf="item.overtime" item-end>OT {{item.overtime}}m</ion-badge>
+                                        <p *ngIf="item.justification">{{item.justification}}</p>
+                                    </ion-item>
+                                </ion-list>
+                            </accordion-content>
+                        </accordion-item>
+                    </accordion>
+                </ion-card-content>
+            </ion-card>
+
+
+        </div>
         <!-- <ion-list no-padding>
             <ion-item *ngFor="let item of uniqueUsers" no-padding>
                 <h2>{{item.name}} </h2> 

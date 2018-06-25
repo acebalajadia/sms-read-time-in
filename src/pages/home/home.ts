@@ -11,6 +11,7 @@ import * as $ from 'jquery'
 
 export class HomePage {
 
+    noOfMsgsToFetch = 300;
     reportGenerated = false;
     data;
     rawdata;
@@ -31,11 +32,11 @@ export class HomePage {
         // this.ReadSMSList();
 
         //for testing only
-        let smsdata = [{ "_id": 11110, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529651614288, "date_sent": 1529651611000, "read": 0, "status": -1, "type": 1, "body": "Time in jer0me", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11109, "thread_id": 11, "address": "+639175517548", "date": 1529651100969, "date_sent": 1529651098000, "read": 0, "status": -1, "type": 1, "body": "time in:eman", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11108, "thread_id": 8, "address": "+639178523162", "date": 1529648070917, "date_sent": 1529648063000, "read": 1, "status": -1, "type": 1, "body": "Time in angelo ", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11104, "thread_id": 8, "address": "+639178523162", "date": 1529638400449, "date_sent": 1529638398000, "read": 1, "status": -1, "type": 1, "body": "Time out angelo ", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11103, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529636825533, "date_sent": 1529636823000, "read": 1, "status": -1, "type": 1, "body": "Time 0ut jer0me", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11102, "thread_id": 11, "address": "+639175517548", "date": 1529636655079, "date_sent": 1529636652000, "read": 1, "status": -1, "type": 1, "body": "time out:eman", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11094, "thread_id": 10, "address": "+63 917 533 0584", "date": 1529632687678, "date_sent": 1529632399000, "read": 1, "status": -1, "type": 1, "body": "TIME IN :mark  ", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11093, "thread_id": 254, "address": "+63 917 533 0854", "date": 1529632682483, "date_sent": 1529632319000, "read": 1, "status": -1, "type": 1, "body": "Time in ericson", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11092, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529632115549, "date_sent": 1529631995000, "read": 1, "status": -1, "type": 1, "body": "Time in ems", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11091, "thread_id": 11, "address": "+639175517548", "date": 1529631316184, "date_sent": 1529626161000, "read": 1, "status": -1, "type": 1, "body": "timein:ben", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11090, "thread_id": 8, "address": "+639178523162", "date": 1529631315783, "date_sent": 1529625460000, "read": 1, "status": -1, "type": 1, "body": "Time in bham", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11089, "thread_id": 10, "address": "+63 917 533 0584", "date": 1529631315331, "date_sent": 1529624964000, "read": 1, "status": -1, "type": 1, "body": "Time in:erics0n ", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11088, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529631314957, "date_sent": 1529624244000, "read": 1, "status": -1, "type": 1, "body": "TIME IN: jer0me\nJustification: Arrived 656 in store but opening rider arrived 736. ", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11087, "thread_id": 254, "address": "+63 917 533 0854", "date": 1529631314665, "date_sent": 1529623326000, "read": 1, "status": -1, "type": 1, "body": "Time in chano", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11086, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529631314242, "date_sent": 1529623114000, "read": 1, "status": -1, "type": 1, "body": "Time in jeff", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }];
-
+        // let smsdata = [{ "_id": 11110, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529651614288, "date_sent": 1529651611000, "read": 0, "status": -1, "type": 1, "body": "Time in jer0me", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11109, "thread_id": 11, "address": "+639175517548", "date": 1529651100969, "date_sent": 1529651098000, "read": 0, "status": -1, "type": 1, "body": "time in:eman", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11108, "thread_id": 8, "address": "+639178523162", "date": 1529648070917, "date_sent": 1529648063000, "read": 1, "status": -1, "type": 1, "body": "Time in angelo ", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11104, "thread_id": 8, "address": "+639178523162", "date": 1529638400449, "date_sent": 1529638398000, "read": 1, "status": -1, "type": 1, "body": "Time out angelo ", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11103, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529636825533, "date_sent": 1529636823000, "read": 1, "status": -1, "type": 1, "body": "Time 0ut jer0me", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11102, "thread_id": 11, "address": "+639175517548", "date": 1529636655079, "date_sent": 1529636652000, "read": 1, "status": -1, "type": 1, "body": "time out:eman", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11094, "thread_id": 10, "address": "+63 917 533 0584", "date": 1529632687678, "date_sent": 1529632399000, "read": 1, "status": -1, "type": 1, "body": "TIME IN :mark  ", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11093, "thread_id": 254, "address": "+63 917 533 0854", "date": 1529632682483, "date_sent": 1529632319000, "read": 1, "status": -1, "type": 1, "body": "Time in ericson", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11092, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529632115549, "date_sent": 1529631995000, "read": 1, "status": -1, "type": 1, "body": "Time in ems", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11091, "thread_id": 11, "address": "+639175517548", "date": 1529631316184, "date_sent": 1529626161000, "read": 1, "status": -1, "type": 1, "body": "timein:ben", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11090, "thread_id": 8, "address": "+639178523162", "date": 1529631315783, "date_sent": 1529625460000, "read": 1, "status": -1, "type": 1, "body": "Time in bham", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11089, "thread_id": 10, "address": "+63 917 533 0584", "date": 1529631315331, "date_sent": 1529624964000, "read": 1, "status": -1, "type": 1, "body": "Time in:erics0n ", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11088, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529631314957, "date_sent": 1529624244000, "read": 1, "status": -1, "type": 1, "body": "TIME IN: jer0me\nJustification: Arrived 656 in store but opening rider arrived 736. ", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11087, "thread_id": 254, "address": "+63 917 533 0854", "date": 1529631314665, "date_sent": 1529623326000, "read": 1, "status": -1, "type": 1, "body": "Time in chano", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11086, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529631314242, "date_sent": 1529623114000, "read": 1, "status": -1, "type": 1, "body": "Time in jeff", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }];
+        let smsdata = [{ "_id": 11159, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529725445621, "date_sent": 1529725443000, "read": 1, "status": -1, "type": 1, "body": "Time out cris/jer0me", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11156, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529718602252, "date_sent": 1529718601000, "read": 1, "status": -1, "type": 1, "body": "Time in jeff/jer0me", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11149, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529709296110, "date_sent": 1529709293000, "read": 1, "status": -1, "type": 1, "body": "TIME IN: cris\nJustification: Arrived 7:03 in store but opening rider arrived 7:14. ", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11142, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529708189144, "date_sent": 1529708187000, "read": 1, "status": -1, "type": 1, "body": "Time in jer0me", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11130, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529667016270, "date_sent": 1529667008000, "read": 1, "status": -1, "type": 1, "body": "Time out jer0me", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11121, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529666040103, "date_sent": 1529666038000, "read": 1, "status": -1, "type": 1, "body": "Time out ems", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11110, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529651614288, "date_sent": 1529651611000, "read": 1, "status": -1, "type": 1, "body": "Time in jer0me", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11103, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529636825533, "date_sent": 1529636823000, "read": 1, "status": -1, "type": 1, "body": "Time 0ut jer0me", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11092, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529632115549, "date_sent": 1529631995000, "read": 1, "status": -1, "type": 1, "body": "Time in ems", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11088, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529631314957, "date_sent": 1529624244000, "read": 1, "status": -1, "type": 1, "body": "TIME IN: jer0me\nJustification: Arrived 656 in store but opening rider arrived 736. ", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11086, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529631314242, "date_sent": 1529623114000, "read": 1, "status": -1, "type": 1, "body": "Time in jeff", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11076, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529582889589, "date_sent": 1529582887000, "read": 1, "status": -1, "type": 1, "body": "Time out jeff", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11075, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529582202838, "date_sent": 1529582200000, "read": 1, "status": -1, "type": 1, "body": "Time out cris", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11061, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529574298213, "date_sent": 1529574296000, "read": 1, "status": -1, "type": 1, "body": "Time0ut-js0n", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11051, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529539386842, "date_sent": 1529539384000, "read": 1, "status": -1, "type": 1, "body": "Timein js0n", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11048, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529537740575, "date_sent": 1529537734000, "read": 1, "status": -1, "type": 1, "body": "TIME IN: cris\nJustification: Arrived 7:02 in store but opening rider arrived 7:36. ", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11046, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529536887937, "date_sent": 1529536885000, "read": 1, "status": -1, "type": 1, "body": "Time in jeff", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11025, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529493134883, "date_sent": 1529493133000, "read": 1, "status": -1, "type": 1, "body": "Time out jer0me", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11024, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529493098565, "date_sent": 1529493096000, "read": 1, "status": -1, "type": 1, "body": "Time out jer0me", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11023, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529492469287, "date_sent": 1529492467000, "read": 1, "status": -1, "type": 1, "body": "Time out cris", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 11019, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529486098135, "date_sent": 1529486095000, "read": 1, "status": -1, "type": 1, "body": "Time out,js0n", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 10999, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529457572295, "date_sent": 1529451100000, "read": 1, "status": -1, "type": 1, "body": "TIME IN: cris\nJustification: Arrived 6:50 in store but opening rider arrived 7:34. ", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 10998, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529457571745, "date_sent": 1529450165000, "read": 1, "status": -1, "type": 1, "body": "Time in jer0me", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 10981, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529407055272, "date_sent": 1529407053000, "read": 1, "status": -1, "type": 1, "body": "Time out jeff", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 10972, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529406246274, "date_sent": 1529406231000, "read": 1, "status": -1, "type": 1, "body": "Time out cris", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 10965, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529399915458, "date_sent": 1529399908000, "read": 1, "status": -1, "type": 1, "body": "Time0ut js0n", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 10958, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529395455932, "date_sent": 1529395455000, "read": 1, "status": -1, "type": 1, "body": "Time 0ut jer0me", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 10955, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529391658744, "date_sent": 1529391656000, "read": 1, "status": -1, "type": 1, "body": "Time in cris", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 10952, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529378951903, "date_sent": 1529378634000, "read": 1, "status": -1, "type": 1, "body": "Time out cris", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }, { "_id": 10944, "thread_id": 9, "address": "(0917) 852 5794", "date": 1529373331077, "date_sent": 1529373325000, "read": 1, "status": -1, "type": 1, "body": "Time in jeff", "service_center": "+639170000299", "locked": 0, "sub_id": 3, "error_code": 0, "creator": "com.textra", "seen": 0, "priority": -1 }]
         this.processSMS(smsdata);
 
-        this.reportGenerated = true;
+
         loading.dismiss();
     }
 
@@ -97,7 +98,7 @@ export class HomePage {
             let filter = {
                 box: 'inbox', // 'inbox' (default), 'sent', 'draft'
                 indexFrom: 0, // start from index 0
-                maxCount: 100, // count of SMS to return each time
+                maxCount: this.noOfMsgsToFetch, // count of SMS to return each time
                 address: mobile,
             };
 
@@ -146,7 +147,7 @@ export class HomePage {
 
             //get name
             var msg = '';
-            let filteredMsg = item.body.replace('-', ' ').replace(':', ' ').replace('', ' ').replace('"', ' ').replace('.', ' ').replace('~', ' ').trim();
+            let filteredMsg = item.body.replace(/[!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>?]/gm, ' ').trim();
             if (item.body.toLowerCase().indexOf('justification') > 0) {
                 msg = filteredMsg.substr(0, filteredMsg.toLowerCase().indexOf('justification')).split(' ');
             }
@@ -245,12 +246,6 @@ export class HomePage {
                     break;
             }
 
-
-
-            //sum up status
-
-
-
             return {
                 branch: branch,
                 address: item.address,
@@ -266,6 +261,31 @@ export class HomePage {
             };
         });
 
+        //process multiple users split by slash
+        result.forEach((element, index) => {
+            let splitusers: any;
+            if (element.name.indexOf('/') > 0) {
+                splitusers = element.name.split('/');
+                result.splice(index, 1);//remove current item with multiple users and insert 2 new records
+                splitusers.forEach(splituser => {
+                    result.splice(index, 0,
+                        {
+                            branch: element.branch,
+                            address: element.address,
+                            activity: element.activity,
+                            name: splituser,
+                            fulldatetime: element.fulldatetime,
+                            date: element.date,
+                            early: element.early,
+                            late: element.late,
+                            overtime: element.overtime,
+                            sched: element.sched,
+                            justification: element.justification
+                        });
+                });
+            }
+        });
+
         this.rawdata = JSON.stringify(smsdata)
         this.data = JSON.stringify(result); //process data
         this.timelogs = result;
@@ -276,6 +296,8 @@ export class HomePage {
         //save unique users 
         result.forEach(item => {
             let exists = false;
+
+            //add single user
             this.uniqueUsers.forEach(element => {
                 if (item.name == element.name) {
                     //don't insert
@@ -283,45 +305,49 @@ export class HomePage {
                     return;
                 }
             });
-            console.log('exists : ' + exists + ' '+ item.name);
-            if (!exists){
-                console.log('insert : ' + item.name);
+
+            if (!exists) {
                 this.uniqueUsers.push({
                     branch: item.branch,
-                    address: item.address, 
-                    name: item.name, 
+                    address: item.address,
+                    name: item.name,
                     early: 0,
                     late: 0,
                     overtime: 0,
                     attendance: 1,
-                    timelogs:[]
+                    timelogs: []
                 });
             }
         });
-        console.log(JSON.stringify(this.uniqueUsers));
 
         //sum up
         this.uniqueUsers.forEach(item => {
             result.forEach(element => {
-                if(item.name == element.name){
+                if (item.name == element.name) {
                     item.early += element.early;
-                    item.late += element.late;
-                    item.overtime += element.overtime; 
+                    //threshold only sum if more than 15m
+                    if (element.late > 10)
+                        item.late += element.late;
+                    //threshold only sum if more than 15m
+                    if (element.overtime > 15)
+                        item.overtime += element.overtime;
+                    //save all allogs
                     item.timelogs.push(element);
                 }
-            }); 
+            });
         });
 
         //count attendance
         this.uniqueUsers.forEach(item => {
             let dateholder = item.timelogs[0].date;
             item.timelogs.forEach(element => {
-                if(dateholder!=element.date){
+                if (dateholder != element.date) {
                     item.attendance += 1;
                     dateholder = element.date;
-                } 
-            }); 
+                }
+            });
         });
 
-    } 
+        this.reportGenerated = true;
+    }
 }

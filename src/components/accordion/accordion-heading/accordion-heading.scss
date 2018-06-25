@@ -1,12 +1,13 @@
 accordion-heading {
     .item-md {
         padding: 0;
+        // margin: 0 10px;
+        // width: calc(100% - 20px);
     }
     ion-label.label-md {
-        padding: 2.3rem 2.3rem 2.3rem 3rem;
-        margin: 0;
-        font-size: 2rem;
-        font-weight: bold;
+        // padding: 2.3rem 2.3rem 2.3rem 3rem;
+        margin: 0; // font-size: 2rem;
+        // font-weight: bold;
         position: relative;
         -webkit-transition: all 0.3s;
         transition: all 0.3s;
@@ -14,7 +15,7 @@ accordion-heading {
     }
     ion-icon {
         position: absolute;
-        top: 24px;
-        right: 20px;
+        top: 0px;
+        right: 10px;
     }
 }

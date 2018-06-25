@@ -2,8 +2,13 @@ page-home {
     textarea {
         width: 100%;
     }
-    .list-header-md {
+    ion-card {
         background-color: #efefef;
+        ion-avatar img {
+            border-radius: 50%;
+            width: 30%;
+            margin: 0 auto;
+        }
         h1 {
             text-transform: uppercase;
             font-weight: bold;
@@ -13,10 +18,10 @@ page-home {
         }
         .time-stat {
             position: relative;
-            padding: 5px 0; 
+            padding: 0;
             margin-bottom: 5px;
             font-weight: bold;
-            span{
+            span {
                 position: relative;
             }
         }
@@ -36,19 +41,21 @@ page-home {
             }
         }
         .background {
-            margin-left: 100px;
-            // width: calc(50%);
+            margin-left: 80px;  
             width: 0;
             display: block;
             position: absolute;
             top: 0;
             left: 0; // width: 0;
-            height: 100%;
-            // z-index: 1;
+            height: 100%; // z-index: 1;
         }
     }
-    .item-md h2 {
-        text-transform: uppercase; // font-weight: bold;
+    .item-md {
+        padding: 0;
+        border-bottom: 1px solid lightgray;
+        h2 {
+            text-transform: uppercase; // font-weight: bold;
+        }
     }
     .swiper-container {
         overflow: auto;
