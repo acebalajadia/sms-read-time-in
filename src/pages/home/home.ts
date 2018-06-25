@@ -371,7 +371,7 @@ export class HomePage {
             });
 
             //calculate earlybird reward
-            item.earlyBirdReward = Math.floor(item.late / 200);
+            item.earlyBirdReward = Math.floor(item.early / 200);
             // item.earlyBirdReward = Math.floor(item.early / 10); // test
 
             //calculate late memo
