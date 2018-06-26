@@ -5,8 +5,10 @@
  ☐
 6.25.2018
 objective: date range filter
- ☐ remove no of msgs input - default to 10000
- ☐ change logic of reading data from sms
- ☐ first, load all data to var rawdata
- ☐ processing will happen locally in rawdata
+ ✔ remove number of msgs input - default to 10000 @done (18-06-26 16:09)
+ ✔ change logic of reading data from sms @done (18-06-26 16:09)
+ ✔ first, load all data to var rawdata @done (18-06-26 16:09)
+ ✔ processing will happen locally in rawdata @done (18-06-26 16:09)
+ ✔ add new filtering exclude justification @done (18-06-26 16:09)
+
 
