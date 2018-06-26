@@ -1,5 +1,12 @@
- ☐ update profile pics
- ☐ add badge for memo if late exceeds threshold
- ☐ add badge for award early bird
- ☐ asyncrounouse loading
- ☐ 
+ ✔ update profile pics @done (18-06-26 10:45)
+ ✔ add badge for memo if late exceeds threshold @done (18-06-26 10:45)
+ ✔ add badge for award early bird @done (18-06-26 10:45)
+ ✔ asyncrounouse loading @done (18-06-26 10:45)
+ ☐
+6.25.2018
+objective: date range filter
+ ☐ remove no of msgs input - default to 10000
+ ☐ change logic of reading data from sms
+ ☐ first, load all data to var rawdata
+ ☐ processing will happen locally in rawdata
+
