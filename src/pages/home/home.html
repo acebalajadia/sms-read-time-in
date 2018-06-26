@@ -17,6 +17,10 @@
         <ion-label>End Date</ion-label>
         <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="endDate"></ion-datetime>
     </ion-item>
+    <ion-item>
+        <ion-label>Exclude Justification</ion-label> 
+        <ion-toggle [(ngModel)]="excludeJustification"></ion-toggle>
+    </ion-item>
     <button ion-button color="danger" (click)="getData()">Get Data (hard coded test data)</button>
     <button ion-button color="danger" (click)="generateReport()">All</button>
     <button ion-button color="danger" (click)="generateLeg1Report()">Leg1</button>

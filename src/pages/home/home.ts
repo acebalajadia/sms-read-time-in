@@ -13,12 +13,13 @@ export class HomePage {
 
     //filters
     noOfMsgsToFetch = 10000;
-    startDate = new Date().toISOString();
+    tempdate = new Date();
+    startDate = new Date(this.tempdate.getFullYear(), this.tempdate.getMonth(), 1).toISOString();
     endDate = new Date().toISOString();
-    mobile = ''; 
+    mobile = '';
 
     excludeJustification = false;
-    
+
     noData = false;
     reportGenerated = false;
     finalProcessedData;
@@ -34,13 +35,9 @@ export class HomePage {
     constructor(public platform: Platform, public androidPermissions: AndroidPermissions, private loadingCtrl: LoadingController) {
         // this.checkPermission(); 
     }
-    
-    // ionViewDidLoad(){
-    //     let loading = this.loadingCtrl.create({ content: "Loading data please wait...",});
-    //     loading.present().then(()=>{
-    //         this.ReadSMSList();
-    //         loading.dismiss();
-    //     });
+
+    // ionViewDidLoad(){ 
+    //     this.ReadSMSList(); 
     // } 
 
     //helper for looping in front end
@@ -68,28 +65,28 @@ export class HomePage {
     }
 
     generateLeg1Report() {
-        var mobile = '+639178523162';
-        this.processSMS(mobile);
+        this.mobile = '+639178523162';
+        this.processSMS();
     }
     generateLeg2Report() {
-        var mobile = '+639178525794';
-        this.processSMS(mobile);
+        this.mobile = '+639178525794';
+        this.processSMS();
     }
     generateDrgReport() {
-        var mobile = '+639175517548';
-        this.processSMS(mobile);
+        this.mobile = '+639175517548';
+        this.processSMS();
     }
     generateOasReport() {
-        var mobile = '+639175330584';
-        this.processSMS(mobile);
+        this.mobile = '+639175330584';
+        this.processSMS();
     }
     generateGuinobatanReport() {
-        var mobile = '+639178385603';
-        this.processSMS(mobile);
+        this.mobile = '+639178385603';
+        this.processSMS();
     }
     generateLigaoReport() {
-        var mobile = '+639175330854';
-        this.processSMS(mobile);
+        this.mobile = '+639175330854';
+        this.processSMS();
     }
 
     checkPermission(mobile = '') {
@@ -110,13 +107,13 @@ export class HomePage {
                         });
             });
 
-        this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.READ_SMS]);
+        // this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.READ_SMS]);
 
     }
 
     ReadSMSList(mobile = '') { //default read all
         this.platform.ready().then((readySource) => {
-            const loading = this.loadingCtrl.create();
+            const loading = this.loadingCtrl.create({ content: "Reading sms data please wait...", });
             loading.present().then(() => {
                 let filter = {
                     box: 'inbox', // 'inbox' (default), 'sent', 'draft'
@@ -149,7 +146,7 @@ export class HomePage {
             //no data - no processing
         }
         else {
-            const loading = this.loadingCtrl.create();
+            const loading = this.loadingCtrl.create({ content: "Processing data please wait...", });
             loading.present().then(() => {
                 //first step filtering - filter by startdate and enddate and mobile
                 let startDate = new Date(this.startDate),
@@ -394,13 +391,25 @@ export class HomePage {
                 this.uniqueUsers.forEach(item => {
                     result.forEach(element => {
                         if (item.name == element.name) {
+                            if (this.excludeJustification) {
+                                //don't consider late if justification has value  
+                                if (element.justification == '') {
+                                    //threshold only sum if more than 15m
+                                    if (element.late > 10)
+                                        item.late += element.late;
+                                }
+                            }
+                            else {
+                                //threshold only sum if more than 15m
+                                if (element.late > 10)
+                                    item.late += element.late;
+                            }
+
                             item.early += element.early;
-                            //threshold only sum if more than 15m
-                            if (element.late > 10)
-                                item.late += element.late;
                             //threshold only sum if more than 15m
                             if (element.overtime > 15)
                                 item.overtime += element.overtime;
+
                             //save all allogs
                             item.timelogs.push(element);
                         }
@@ -429,14 +438,14 @@ export class HomePage {
                 });
 
                 // this.uniqueUsersRaw = JSON.stringify(this.uniqueUsers);
-                
-                if(this.uniqueUsers.length==0){
-                    this.noData = true; 
+
+                if (this.uniqueUsers.length == 0) {
+                    this.noData = true;
                 }
-                else{
+                else {
                     this.reportGenerated = true;
                 }
-                    
+
 
                 loading.dismiss();
             });
