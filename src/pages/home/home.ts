@@ -12,7 +12,7 @@ import * as $ from 'jquery'
 export class HomePage {
 
     //filters
-    noOfMsgsToFetch = 10000;
+    noOfMsgsToFetch = 2000;
     tempdate = new Date();
     startDate = new Date(this.tempdate.getFullYear(), this.tempdate.getMonth(), 1).toISOString();
     endDate = new Date().toISOString();
@@ -91,6 +91,10 @@ export class HomePage {
     generateLigaoReport() {
         this.mobile = '9175330854';
         this.processSMS();
+    }
+
+    sendReportDataToEmail(){
+        //code for sending email of processed data
     }
 
     checkPermission() {
@@ -250,17 +254,20 @@ export class HomePage {
                         case 10:
                             sched = new Date(fulldate + ' ' + '10:00');
                             break;
+                        case 11://out - lunch break
+                        case 12://out - lunch break
+                            sched = new Date(fulldate + ' ' + '10:00');
+                            break;
                         case 14:
                         case 15:
                             sched = new Date(fulldate + ' ' + '15:00');
-                            break;
-
-                        case 16:
+                            break; 
+                        case 16: //out - opening
                             sched = new Date(fulldate + ' ' + '16:00');
-                        case 17:
-                        case 18:
+                        case 17: //out - 8-5
+                        case 18: //out - 8-5
                             sched = new Date(fulldate + ' ' + '17:00');
-                        case 19:
+                        case 19: //out - closing
                         case 20:
                         case 21:
                             sched = new Date(fulldate + ' ' + '19:00');

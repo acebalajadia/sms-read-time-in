@@ -18,7 +18,7 @@
         <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="endDate"></ion-datetime>
     </ion-item>
     <ion-item>
-        <ion-label>Exclude Justification</ion-label> 
+        <ion-label>Exclude Justification</ion-label>
         <ion-toggle [(ngModel)]="excludeJustification"></ion-toggle>
     </ion-item>
     <!-- <button ion-button color="danger" (click)="getData()">Get Data (hard coded test data)</button> -->
@@ -29,7 +29,7 @@
     <button ion-button color="danger" (click)="generateOasReport()">Oas</button>
     <button ion-button color="danger" (click)="generateGuinobatanReport()">Guinobatan</button>
     <button ion-button color="danger" (click)="generateLigaoReport()">Ligao</button>
-
+    <button ion-button color="danger" *ngIf="reportGenerated" (click)="sendReportDataToEmail()">Send data to email</button>
     <div class="no-data" *ngIf="noData">
         No data returned
     </div>
@@ -104,18 +104,6 @@
                 </ion-card-content>
             </ion-card>
         </div>
-        <accordion>
-            <accordion-item>
-                <accordion-heading>
-                    Raw data
-                </accordion-heading>
-                <accordion-content>
-                    <label for="">Raw data</label>
-                    <textarea name="" id="" cols="30" rows="10">{{rawdataJson}}</textarea>
-                    <label for="">Processed data</label>
-                    <textarea name="" id="" cols="30" rows="10">{{finalProcessedData}}</textarea>
-                </accordion-content>
-            </accordion-item>
-        </accordion>
+
     </div>
 </ion-content>
