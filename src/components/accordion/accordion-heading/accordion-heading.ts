@@ -14,7 +14,7 @@ export class AccordionHeadingComponent {
     @Output() toggled = new EventEmitter<boolean>();
 
     constructor() {
-        console.log('Hello AccordionHeadingComponent Component');
+        // console.log('Hello AccordionHeadingComponent Component');
 
     }
     toggle() {

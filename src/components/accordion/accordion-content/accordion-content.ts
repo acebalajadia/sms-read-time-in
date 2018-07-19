@@ -15,7 +15,7 @@ export class AccordionContentComponent {
   text: string;
 
   constructor() {
-    console.log('Hello AccordionContentComponent Component');
+    // console.log('Hello AccordionContentComponent Component');
     this.text = 'Hello World';
   }
 

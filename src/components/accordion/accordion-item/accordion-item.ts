@@ -16,7 +16,7 @@ export class AccordionItemComponent {
     opened: boolean = false;
  
   constructor() {
-    console.log('Hello AccordionItemComponent Component'); 
+    // console.log('Hello AccordionItemComponent Component'); 
   }
     ngAfterContentInit() {
         this.heading.toggled.subscribe(() => {

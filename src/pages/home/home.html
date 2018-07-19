@@ -21,7 +21,7 @@
         <ion-label>Exclude Justification</ion-label>
         <ion-toggle [(ngModel)]="excludeJustification"></ion-toggle>
     </ion-item>
-    <!-- <button ion-button color="danger" (click)="getData()">Get Data (hard coded test data)</button> -->
+    <button ion-button color="danger" (click)="getData()">Get Data (hard coded test data)</button>
     <button ion-button color="danger" (click)="generateReport()">All</button>
     <button ion-button color="danger" (click)="generateLeg1Report()">Leg1</button>
     <button ion-button color="danger" (click)="generateLeg2Report()">Leg2</button>
@@ -30,6 +30,10 @@
     <button ion-button color="danger" (click)="generateGuinobatanReport()">Guinobatan</button>
     <button ion-button color="danger" (click)="generateLigaoReport()">Ligao</button>
     <button ion-button color="danger" *ngIf="reportGenerated" (click)="sendReportDataToEmail()">Send data to email</button>
+
+    <!-- <textarea rows="20">{{salesLogsJson}}</textarea>
+    <textarea rows="20">{{rawdataJson}}</textarea>  -->
+
     <div class="no-data" *ngIf="noData">
         No data returned
     </div>
@@ -52,40 +56,43 @@
                             </span>
                         </div>
                     </ion-card-title>
+                    <hr>
+                    <h3 class="section-title">Attendance</h3>
+                    <div class="time stat date-range">
+                        <span>Date range {{user.timelogs[user.timelogs.length-1].date}} - {{user.timelogs[0].date}} </span>
+                    </div>
+                    <div class="time-stat total-attendanace">
+                        <span>Total attendance {{user.attendance}}</span>
+                    </div>
                     <div class="time-stat early">
                         <div class="background" [style.width]="user.early+'%'"></div>
                         <span>Early {{user.early}}m</span>
                     </div>
-
                     <div class="time-stat late">
                         <div class="background" [style.width]="user.late+'%'"></div>
                         <span>Late {{user.late}}m</span>
                     </div>
-                    <div class="time-stat late" *ngIf="user.lateMemo">
+                    <div class="time-stat late" *ngIf="user.lateLogs.length >= 8">
+                        <!-- Company policy states 8 consecutive late-->
                         <span>
-                            For memo:
-                            <ion-icon name="md-alert" *ngFor="let i of getNumber(user.lateMemo)"></ion-icon>
+                            Total late: {{user.lateLogs.length}} FOR MEMO
+                            <ion-icon name="md-alert"></ion-icon>
+                            <small>Policy states 8 consecutive late in a month</small>
                         </span>
+                        <textarea>{{user.lateLogs.join('mins\n')}}mins</textarea>
                     </div>
-
                     <div class="time-stat ot">
                         <div class="background" [style.width]="user.overtime+'%'"></div>
                         <span>OT {{user.overtime}}m</span>
                     </div>
-                    <div class="time-stat total-attendanace">
-                        <span>Total attendance {{user.attendance}}</span>
 
-                    </div>
-                    <div class="time stat date-range">
-                        <span>Date range {{user.timelogs[user.timelogs.length-1].date}} - {{user.timelogs[0].date}} </span>
-                    </div>
                     <accordion>
                         <accordion-item>
-                            <accordion-heading>More details...</accordion-heading>
+                            <accordion-heading>More attendance details...</accordion-heading>
                             <accordion-content>
                                 <ion-list>
                                     <ion-item *ngFor="let item of user.timelogs">
-                                        <h2>{{item.name}} </h2>
+                                        <!-- <h2>{{item.name}} </h2> -->
                                         <h3>{{item.fulldatetime}}</h3>
                                         <h4 *ngIf="item.activity == 'IN'">Sched:{{item.sched}}</h4>
 
@@ -93,7 +100,7 @@
                                         <ion-badge [color]="item.activity == 'IN' ? 'secondary' : 'dark'">{{item.activity}}</ion-badge>
 
                                         <ion-badge *ngIf="item.early" color="secondary" item-end>Early {{item.early}}m for {{item.sched}}</ion-badge>
-                                        <ion-badge *ngIf="item.late" color="danger" item-end>Late {{item.late}}m after {{item.sched}}</ion-badge>
+                                        <ion-badge *ngIf="item.late" color="danger">Late {{item.late}}m after {{item.sched}}</ion-badge>
                                         <ion-badge *ngIf="item.overtime" item-end>OT {{item.overtime}}m</ion-badge>
                                         <p *ngIf="item.justification">{{item.justification}}</p>
                                     </ion-item>
@@ -101,6 +108,15 @@
                             </accordion-content>
                         </accordion-item>
                     </accordion>
+                    <h3 class="section-title">Sales Performance</h3>
+                    <div>
+                        <div> 330g: {{user.sales['330g']}}</div>
+                        <div>2.7kg: {{user.sales['2.7kg']}}</div>
+                        <div>5kg: {{user.sales['5kg']}}</div>
+                        <div>11kg: {{user.sales['11kg']}}</div>
+                        <div>22kg: {{user.sales['22kg']}}</div>
+                        <div>50kg: {{user.sales['50kg']}}</div>
+                    </div>
                 </ion-card-content>
             </ion-card>
         </div>
