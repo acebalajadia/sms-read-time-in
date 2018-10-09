@@ -32,9 +32,9 @@
     <!-- <textarea rows="20">{{salesLogsJson}}</textarea> -->
     <!-- <textarea rows="20">{{timeLogsRawdataJson}}</textarea>  -->
 
-    <div class="no-data" *ngIf="noData">
+    <!-- <div class="no-data" *ngIf="noData">
         No data returned
-    </div>
+    </div> -->
 
     <div class="report-generated" *ngIf="reportGenerated">
 
@@ -80,8 +80,8 @@
                         <div class="background" [style.width]="user.late+'%'"></div>
                         <span>Late {{user.late}}m</span>
                     </div>
-                    <div class="late">
-                         Total late: {{user.lateLogs.length}}
+                    <div class="time-stat total-late">
+                         Total late: {{user.lateLogs.length}} <small>Note: late threshold 8mins</small>
                     </div>
                     <div class="time-stat late" *ngIf="user.lateLogs.length >= 8">
                         <!-- Company policy states 8 consecutive late-->
