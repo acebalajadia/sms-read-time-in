@@ -2,6 +2,9 @@ page-home {
     textarea {
         width: 100%;
     }
+    .card-title-md {
+        margin-left: 10px;
+    }
     ion-card {
         background-color: #efefef;
         .avatar {
@@ -51,7 +54,7 @@ page-home {
         }
         .late {
             [name="md-alert"] {
-                font-size: 30px;
+                font-size: 16px;
                 margin: 0 3px;
                 color: color($colors, danger);
                 animation-name: danger-color-animation;
@@ -98,6 +101,22 @@ page-home {
     }
     .section-title {
         font-size: 22px;
+    }
+    .table {
+        font-size: 11px;
+        ion-badge {
+            font-size: 11px;
+        }
+        tr {
+            border: 1px solid #ccc;
+        }
+        td {
+            padding: 1px;
+        }
+        p {
+            font-size: 11px !important;
+            font-weight: bold !important;
+        }
     }
 }
 
