@@ -1,212 +1,226 @@
 page-home {
-    textarea {
-        width: 100%;
+  .branch-name {
+    background-color: #ebebeb;
+    padding: 10px;
+    text-transform: uppercase;
+  }
+
+  .flex-wrap {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: flex-start;
+  }
+  .flex-item {
+    width: 360px;
+  }
+  textarea {
+    width: 100%;
+  }
+  .card-title-md {
+    margin-left: 10px;
+  }
+  ion-card {
+    background-color: #efefef;
+    .avatar {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      margin: 0 auto;
+      background-position: center;
+      background-size: cover;
     }
-    .card-title-md {
-        margin-left: 10px;
+    h1 {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 30px;
     }
-    ion-card {
-        background-color: #efefef;
-        .avatar {
-            border-radius: 50%;
-            width: 100px;
-            height: 100px;
-            margin: 0 auto;
-            background-position: center;
-            background-size: cover;
-        }
-        h1 {
-            text-transform: uppercase;
-            font-weight: bold;
-            font-size: 30px;
-        }
-        h2 {
-            font-weight: bold;
-        }
-        .time-stat {
-            position: relative;
-            padding: 0;
-            margin-bottom: 5px;
-            font-weight: bold;
-            overflow: hidden;
-            span {
-                position: relative;
-            }
-        }
-        .early {
-            [name="md-star"] {
-                font-size: 30px;
-                margin: 0 3px;
-                color: gold;
-                animation-name: winning-color-animation;
-                animation-duration: 1s;
-                animation-iteration-count: infinite;
-                animation-direction: alternate;
-                -webkit-animation: winning-color-animation 1s infinite alternate;
-                -moz-animation: winning-color-animation 1s infinite alternate;
-                -ms-animation: winning-color-animation 1s infinite alternate;
-                -o-animation: winning-color-animation 1s infinite alternate;
-                animation: winning-color-animation 1s infinite alternate;
-            }
-            .background {
-                background-color: color($colors, secondary);
-            }
-        }
-        .late {
-            [name="md-alert"] {
-                font-size: 16px;
-                margin: 0 3px;
-                color: color($colors, danger);
-                animation-name: danger-color-animation;
-                animation-duration: 1s;
-                animation-iteration-count: infinite;
-                animation-direction: alternate;
-                -webkit-animation: danger-color-animation 1s infinite alternate;
-                -moz-animation: danger-color-animation 1s infinite alternate;
-                -ms-animation: danger-color-animation 1s infinite alternate;
-                -o-animation: danger-color-animation 1s infinite alternate;
-                animation: danger-color-animation 1s infinite alternate;
-            }
-            .background {
-                background-color: color($colors, danger);
-            }
-        }
-        .ot {
-            .background {
-                background-color: color($colors, primary);
-            }
-        }
-        .background {
-            margin-left: 80px;
-            width: 0;
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0; // width: 0;
-            height: 100%; // z-index: 1;
-        }
+    h2 {
+      font-weight: bold;
     }
-    .card h2 {
-        text-transform: capitalize;
+    .time-stat {
+      position: relative;
+      padding: 0;
+      margin-bottom: 5px;
+      font-weight: bold;
+      overflow: hidden;
+      span {
+        position: relative;
+      }
     }
-    .item {
-        padding: 0;
-        border-bottom: 1px solid lightgray;
-        h2 {
-            text-transform: uppercase; // font-weight: bold;
-        }
+    .early {
+      [name="md-star"] {
+        font-size: 30px;
+        margin: 0 3px;
+        color: gold;
+        // animation-name: winning-color-animation;
+        // animation-duration: 1s;
+        // animation-iteration-count: infinite;
+        // animation-direction: alternate;
+        // -webkit-animation: winning-color-animation 1s infinite alternate;
+        // -moz-animation: winning-color-animation 1s infinite alternate;
+        // -ms-animation: winning-color-animation 1s infinite alternate;
+        // -o-animation: winning-color-animation 1s infinite alternate;
+        // animation: winning-color-animation 1s infinite alternate;
+      }
+      .background {
+        background-color: color($colors, secondary);
+      }
     }
-    .swiper-container {
-        overflow: auto;
+    .late {
+      [name="md-alert"] {
+        font-size: 16px;
+        margin: 0 3px;
+        color: color($colors, danger);
+        // animation-name: danger-color-animation;
+        // animation-duration: 1s;
+        // animation-iteration-count: infinite;
+        // animation-direction: alternate;
+        // -webkit-animation: danger-color-animation 1s infinite alternate;
+        // -moz-animation: danger-color-animation 1s infinite alternate;
+        // -ms-animation: danger-color-animation 1s infinite alternate;
+        // -o-animation: danger-color-animation 1s infinite alternate;
+        // animation: danger-color-animation 1s infinite alternate;
+      }
+      .background {
+        background-color: color($colors, danger);
+      }
     }
-    .section-title {
-        font-size: 22px;
+    .ot {
+      .background {
+        background-color: color($colors, primary);
+      }
     }
-    .table {
-        font-size: 11px;
-        ion-badge {
-            font-size: 11px;
-        }
-        tr {
-            border: 1px solid #ccc;
-        }
-        td {
-            padding: 1px;
-        }
-        p {
-            font-size: 11px !important;
-            font-weight: bold !important;
-        }
+    .background {
+      margin-left: 80px;
+      width: 0;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0; // width: 0;
+      height: 100%; // z-index: 1;
     }
+  }
+  .card h2 {
+    text-transform: capitalize;
+  }
+  .item {
+    padding: 0;
+    border-bottom: 1px solid lightgray;
+    h2 {
+      text-transform: uppercase; // font-weight: bold;
+    }
+  }
+  .swiper-container {
+    overflow: auto;
+  }
+  .section-title {
+    font-size: 22px;
+  }
+  .table {
+    font-size: 11px;
+    ion-badge {
+      font-size: 11px;
+    }
+    tr {
+      border: 1px solid #ccc;
+    }
+    td {
+      padding: 1px;
+    }
+    p {
+      font-size: 11px !important;
+      font-weight: bold !important;
+    }
+  }
 }
 
 @-webkit-keyframes danger-color-animation {
-    from {
-        color: black;
-    }
-    to {
-        color: color($colors, danger);
-    }
+  from {
+    color: black;
+  }
+  to {
+    color: color($colors, danger);
+  }
 }
 
 @-moz-keyframes danger-color-animation {
-    from {
-        color: black;
-    }
-    to {
-        color: color($colors, danger);
-    }
+  from {
+    color: black;
+  }
+  to {
+    color: color($colors, danger);
+  }
 }
 
 @-ms-keyframes danger-color-animation {
-    from {
-        color: black;
-    }
-    to {
-        color: color($colors, danger);
-    }
+  from {
+    color: black;
+  }
+  to {
+    color: color($colors, danger);
+  }
 }
 
 @-o-keyframes danger-color-animation {
-    from {
-        color: black;
-    }
-    to {
-        color: color($colors, danger);
-    }
+  from {
+    color: black;
+  }
+  to {
+    color: color($colors, danger);
+  }
 }
 
 @keyframes danger-color-animation {
-    from {
-        color: black;
-    }
-    to {
-        color: color($colors, danger);
-    }
+  from {
+    color: black;
+  }
+  to {
+    color: color($colors, danger);
+  }
 }
 
 //===========================================
 @-webkit-keyframes winning-color-animation {
-    from {
-        color: lightyellow;
-    }
-    to {
-        color: color($colors, danger);
-    }
+  from {
+    color: lightyellow;
+  }
+  to {
+    color: color($colors, danger);
+  }
 }
 
 @-moz-keyframes winning-color-animation {
-    from {
-        color: lightyellow;
-    }
-    to {
-        color: gold;
-    }
+  from {
+    color: lightyellow;
+  }
+  to {
+    color: gold;
+  }
 }
 
 @-ms-keyframes winning-color-animation {
-    from {
-        color: lightyellow;
-    }
-    to {
-        color: gold;
-    }
+  from {
+    color: lightyellow;
+  }
+  to {
+    color: gold;
+  }
 }
 
 @-o-keyframes winning-color-animation {
-    from {
-        color: lightyellow;
-    }
-    to {
-        color: gold;
-    }
+  from {
+    color: lightyellow;
+  }
+  to {
+    color: gold;
+  }
 }
 
 @keyframes winning-color-animation {
-    from {
-        color: lightyellow;
-    }
-    to {
-        color: gold;
-    }
+  from {
+    color: lightyellow;
+  }
+  to {
+    color: gold;
+  }
 }

@@ -1,208 +1,215 @@
 <ion-content padding>
-  <ion-item>
-    <ion-label>Start Date</ion-label>
-    <ion-datetime
-      displayFormat="MM/DD/YYYY"
-      [(ngModel)]="startDate"
-    ></ion-datetime>
-  </ion-item>
-  <ion-item>
-    <ion-label>End Date</ion-label>
-    <ion-datetime
-      displayFormat="MM/DD/YYYY"
-      [(ngModel)]="endDate"
-    ></ion-datetime>
-  </ion-item>
-  <ion-item>
-    <ion-label>Exclude Justification</ion-label>
-    <ion-toggle [(ngModel)]="excludeJustification"></ion-toggle>
-  </ion-item>
-  <!--
-    <button ion-button color="danger" (click)="getData()">Get Data (hard coded test data)</button>
-  -->
-  <button ion-button color="danger" (click)="generateReport()">All</button>
-  <button ion-button color="danger" (click)="generateLeg1Report()">Leg1</button>
-  <button ion-button color="danger" (click)="generateLeg2Report()">Leg2</button>
-  <button ion-button color="danger" (click)="generateDrgReport()">
-    Daraga
-  </button>
-  <button ion-button color="danger" (click)="generateOasReport()">Oas</button>
-  <button ion-button color="danger" (click)="generateGuinobatanReport()">
-    Guinobatan
-  </button>
-  <button ion-button color="danger" (click)="generateLigaoReport()">
-    Ligao
-  </button>
-  <button ion-button color="danger" (click)="generateCastillaReport()">
-    Castilla
-  </button>
+  <div class="controls" *ngIf="this.build != 'dev'">
+    <ion-item>
+      <ion-label>Start Date</ion-label>
+      <ion-datetime
+        displayFormat="MM/DD/YYYY"
+        [(ngModel)]="startDate"
+      ></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>End Date</ion-label>
+      <ion-datetime
+        displayFormat="MM/DD/YYYY"
+        [(ngModel)]="endDate"
+      ></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Exclude Justification</ion-label>
+      <ion-toggle [(ngModel)]="excludeJustification"></ion-toggle>
+    </ion-item>
+    <!--
+      <button ion-button color="danger" (click)="getData()">Get Data (hard coded test data)</button>
+    -->
+    <button ion-button color="danger" (click)="generateReport()">All</button>
 
-  <button
-    ion-button
-    color="danger"
-    *ngIf="reportGenerated"
-    (click)="sendReportDataToEmail()"
-  >
-    Send to email
-  </button>
+    <!--
+      <button ion-button color="danger" (click)="generateLeg1Report()">Leg1</button>
+      <button ion-button color="danger" (click)="generateLeg2Report()">Leg2</button>
+      <button ion-button color="danger" (click)="generateDrgReport()">
+        Daraga
+      </button>
+      <button ion-button color="danger" (click)="generateOasReport()">Oas</button>
+      <button ion-button color="danger" (click)="generateGuinobatanReport()">
+        Guinobatan
+      </button>
+      <button ion-button color="danger" (click)="generateLigaoReport()">
+        Ligao
+      </button>
+      <button ion-button color="danger" (click)="generateCastillaReport()">
+        Castilla
+      </button>
+    -->
 
-  <button ion-button outline (click)="screenShot()">Screenshot (PIC)</button>
-  <button ion-button outline (click)="screenShotURI()">Screenshot (URI)</button>
-
-  <img src="{{ screen }}" *ngIf="screenState">
-
-
-  <!-- <textarea rows="20">{{salesLogsJson}}</textarea> -->
-  <!-- <textarea rows="20">{{timeLogsRawdataJson}}</textarea> -->
-
-  <!--
-    <div class="no-data" *ngIf="noData">
-        No data returned
-    </div>
-  -->
+    <button
+      class="send-email"
+      ion-button
+      color="danger"
+      *ngIf="reportGenerated"
+      (click)="sendReportDataToEmail()"
+    >
+      Send to email
+    </button>
+  </div>
 
   <div class="report-generated" *ngIf="reportGenerated">
-    <div *ngFor="let user of uniqueUsers">
-      <ion-card>
-        <ion-card-content>
-          <!--
-            <span>
-            debugging profile pic assets/imgs/{{user.name}}-{{user.branch}}
-            </span>
-          -->
-          <table>
-            <tr>
-              <td>
-                <div
-                  class="avatar"
-                  [ngStyle]="{
-                    'background-image':
-                      'url(' +
-                      'assets/imgs/' +
-                      user.name +
-                      '-' +
-                      user.branch +
-                      '.png)'
-                  }"
-                ></div>
-              </td>
-              <td>
-                <ion-card-title>
-                  <h1>{{ user.name }}</h1>
-                  <h2>{{ user.branch }}</h2>
-                  <div class="time-stat early" *ngIf="user.earlyBirdReward">
-                    <span
-                      >Early bird:
-                      <ion-icon
-                        name="md-star"
-                        *ngFor="let i of getNumber(user.earlyBirdReward)"
-                      ></ion-icon>
-                    </span>
-                  </div>
-                </ion-card-title>
-              </td>
-            </tr>
-          </table>
+    <div *ngFor="let branch of byBranch">
+      <h1 class="branch-name">{{ branch.branch }}</h1>
+      <div class="flex-wrap">
+        <div class="flex-item" *ngFor="let user of branch.users">
+          <ion-card>
+            <ion-card-content>
+              <!--
+                <span>
+                debugging profile pic assets/imgs/{{user.name}}-{{user.branch}}
+                </span>
+              -->
+              <table>
+                <tr>
+                  <td>
+                    <div
+                      class="avatar"
+                      [ngStyle]="{
+                        'background-image':
+                          'url(' +
+                          'assets/imgs/' +
+                          user.name +
+                          '-' +
+                          user.branch +
+                          '.png)'
+                      }"
+                    ></div>
+                  </td>
+                  <td>
+                    <ion-card-title>
+                      <h1>{{ user.name }}</h1>
+                      <h2>{{ user.branch }}</h2>
+                      <div class="time-stat early" *ngIf="user.earlyBirdReward">
+                        <span
+                          >Early bird:
+                          <ion-icon
+                            name="md-star"
+                            *ngFor="let i of getNumber(user.earlyBirdReward)"
+                          ></ion-icon>
+                        </span>
+                      </div>
+                    </ion-card-title>
+                  </td>
+                </tr>
+              </table>
 
-          <hr />
-          <h3 class="section-title">Attendance</h3>
-          <div class="time stat date-range">
-            <span
-              >Date range {{ user.timelogs[user.timelogs.length - 1].date }} -
-              {{ user.timelogs[0].date }}
-            </span>
-          </div>
-          <div class="time-stat total-attendanace">
-            <span>Total attendance {{ user.attendance }}</span>
-          </div>
-          <div class="time-stat early">
-            <div class="background" [style.width]="user.early + '%'"></div>
-            <span>Early {{ user.early }}m</span>
-          </div>
-          <div class="time-stat late">
-            <div class="background" [style.width]="user.late + '%'"></div>
-            <span>Late {{ user.late }}m</span>
-          </div>
-          <div class="time-stat total-late">
-            Total late: {{ user.lateLogs.length }} <br />
-            <small>(Note: late threshold is set to 8mins)</small>
-          </div>
-          <div class="time-stat late" *ngIf="user.lateLogs.length >= 8">
-            <!-- Company policy states 8 consecutive late -->
-            <span>
-              FOR MEMO
-              <ion-icon name="md-alert"></ion-icon>
-              <small>Policy states 8 consecutive late in a month</small>
-            </span>
-            <textarea rows="10">{{user.lateLogs.splice().reverse().join('mins\n')}}mins</textarea>
-          </div>
-          <!--
-            //ot data is not realiable in this app due to complexity of schedules and
-            //schedules in this app are only based on assumptions and not the actual schedule
-            //assigned to a person on each day
-          -->
-          <!--
-            <div class="time-stat ot">
-                <div class="background" [style.width]="user.overtime+'%'"></div>
-                <span>OT {{user.overtime}}m</span>
-            </div>
-          -->
+              <hr />
+              <h3 class="section-title">Attendance</h3>
+              <div class="time stat date-range">
+                <span
+                  >Date range
+                  {{ user.timelogs[user.timelogs.length - 1].date }} -
+                  {{ user.timelogs[0].date }}
+                </span>
+              </div>
+              <div class="time-stat total-attendanace">
+                <span>Total attendance {{ user.attendance }}</span>
+              </div>
+              <div class="time-stat early">
+                <div class="background" [style.width]="user.early + '%'"></div>
+                <span>Early {{ user.early }}m</span>
+              </div>
+              <div class="time-stat late">
+                <div class="background" [style.width]="user.late + '%'"></div>
+                <span>Late {{ user.late }}m</span>
+              </div>
+              <div class="time-stat total-late">
+                Total late: {{ user.lateLogs.length }} <br />
+                <small>(Note: late threshold is set to 8mins)</small>
+              </div>
+              <div class="time-stat late" *ngIf="user.lateLogs.length >= 8">
+                <!-- Company policy states 8 consecutive late -->
+                <span>
+                  FOR MEMO
+                  <ion-icon name="md-alert"></ion-icon>
+                  <small>Policy states 8 consecutive late in a month</small>
+                </span>
+                <table class="table">
+                  <ng-container
+                    *ngFor="let item of user.lateLogs.slice().reverse()"
+                  >
+                    <tr>
+                      <td>{{ item }} mins</td>
+                    </tr>
+                  </ng-container>
+                </table>
+              </div>
+              <!--
+                //ot data is not realiable in this app due to complexity of schedules and
+                //schedules in this app are only based on assumptions and not the actual schedule
+                //assigned to a person on each day
+              -->
+              <!--
+                <div class="time-stat ot">
+                    <div class="background" [style.width]="user.overtime+'%'"></div>
+                    <span>OT {{user.overtime}}m</span>
+                </div>
+              -->
+<strong>TIME LOGS</strong>
+              <table class="table">
+                <ng-container
+                  *ngFor="let item of user.timelogs.slice().reverse()"
+                >
+                  <tr>
+                    <td>{{ item.fulldatetime }}</td>
+                    <td>Sched:{{ item.sched }}</td>
+                    <td>
+                      <!--
+                        <ion-badge [color]="item.activity == 'IN' ? 'secondary' : 'dark'">{{item.activity}}</ion-badge>
+                      -->
+                      <ion-badge
+                        *ngIf="item.activity == 'OUT'"
+                        [color]="item.activity == 'IN' ? 'secondary' : 'dark'"
+                        >{{ item.activity }}</ion-badge
+                      >
+                      <ion-badge *ngIf="item.early" color="secondary" item-end
+                        >Early {{ item.early }}m for {{ item.sched }}</ion-badge
+                      >
+                      <ion-badge *ngIf="item.late" color="danger"
+                        >Late {{ item.late }}m after {{ item.sched }}</ion-badge
+                      >
+                      <!--
+                        <ion-badge *ngIf="item.overtime" item-end>OT</ion-badge>
+                      -->
+                    </td>
+                  </tr>
+                  <tr *ngIf="item.justification">
+                    <td colspan="3">
+                      <p *ngIf="item.justification">JUSTIFICATION: {{ item.justification }}</p>
+                      <div class="time-stat late" *ngIf="item.late >= 30">
+                        <!--
+                          Company policy states 30 mins and above without notice
+                        -->
+                        <span>
+                          <ion-icon name="md-alert"></ion-icon>
+                          <strong>30 mins and above without notice</strong>
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </table>
 
-          <table class="table">
-            <ng-container *ngFor="let item of user.timelogs.slice().reverse()">
-              <tr>
-                <td>{{ item.fulldatetime }}</td>
-                <td>Sched:{{ item.sched }}</td>
-                <td>
-                  <!--
-                    <ion-badge [color]="item.activity == 'IN' ? 'secondary' : 'dark'">{{item.activity}}</ion-badge>
-                  -->
-                  <ion-badge
-                    *ngIf="item.activity == 'OUT'"
-                    [color]="item.activity == 'IN' ? 'secondary' : 'dark'"
-                    >{{ item.activity }}</ion-badge
-                  >
-                  <ion-badge *ngIf="item.early" color="secondary" item-end
-                    >Early {{ item.early }}m for {{ item.sched }}</ion-badge
-                  >
-                  <ion-badge *ngIf="item.late" color="danger"
-                    >Late {{ item.late }}m after {{ item.sched }}</ion-badge
-                  >
-                  <!--
-                    <ion-badge *ngIf="item.overtime" item-end>OT</ion-badge>
-                  -->
-                </td>
-              </tr>
-              <tr *ngIf="item.justification">
-                <td colspan="3">
-                  <p *ngIf="item.justification">{{ item.justification }}</p>
-                  <div class="time-stat late" *ngIf="item.late >= 30">
-                    <!--
-                      Company policy states 30 mins and above without notice
-                    -->
-                    <span>
-                      <ion-icon name="md-alert"></ion-icon>
-                      <small>30 mins and above without notice</small>
-                    </span>
-                  </div>
-                </td>
-              </tr>
-            </ng-container>
-          </table>
-
-          <!--
-            <h3 class="section-title">Sales Performance</h3>
-            <div>
-                <div> 330g: {{user.sales['330g']}}</div>
-                <div>2.7kg: {{user.sales['2.7kg']}}</div>
-                <div>5kg: {{user.sales['5kg']}}</div>
-                <div>11kg: {{user.sales['11kg']}}</div>
-                <div>22kg: {{user.sales['22kg']}}</div>
-                <div>50kg: {{user.sales['50kg']}}</div>
-            </div>
-          -->
-        </ion-card-content>
-      </ion-card>
+              <!--
+                <h3 class="section-title">Sales Performance</h3>
+                <div>
+                    <div> 330g: {{user.sales['330g']}}</div>
+                    <div>2.7kg: {{user.sales['2.7kg']}}</div>
+                    <div>5kg: {{user.sales['5kg']}}</div>
+                    <div>11kg: {{user.sales['11kg']}}</div>
+                    <div>22kg: {{user.sales['22kg']}}</div>
+                    <div>50kg: {{user.sales['50kg']}}</div>
+                </div>
+              -->
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </div>
     </div>
   </div>
 </ion-content>

@@ -11,7 +11,6 @@ import { HomePage } from '../pages/home/home';
 
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { EmailComposer } from '@ionic-native/email-composer';
-import { Screenshot } from '@ionic-native/screenshot';
 
 @NgModule({
   declarations: [MyApp, HomePage, FirstCapsPipe],
@@ -23,7 +22,6 @@ import { Screenshot } from '@ionic-native/screenshot';
     StatusBar,
     SplashScreen,
     EmailComposer,
-    Screenshot,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
