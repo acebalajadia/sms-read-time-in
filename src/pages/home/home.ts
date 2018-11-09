@@ -4,7 +4,7 @@ declare let SMS: any;
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import * as $ from 'jquery';
 import { EmailComposer } from '@ionic-native/email-composer';
-import { Screenshot } from '@ionic-native/screenshot';
+
 
 @Component({
   selector: 'page-home',
@@ -54,7 +54,7 @@ export class HomePage {
     public androidPermissions: AndroidPermissions,
     private loadingCtrl: LoadingController,
     private emailComposer: EmailComposer,
-    private screenshot: Screenshot
+
   ) {
     if (this.build == 'prod') {
       this.checkPermission();
@@ -5184,24 +5184,7 @@ export class HomePage {
     };
 
     this.emailComposer.open(email);
-
-    //code for sending email of processed data
-    // this.emailComposer.isAvailable().then((available: boolean) => {
-    //     if (available) {
-    //         //Now we know we can send
-    //     }
-    // });
-    // let email = {
-    //     to: 'acebalajadia@gmail.com',
-    //     subject: 'Prgaz time logs test data for dev',
-    //     body: 'testing email',
-    //     isHtml: false
-    // };
-    // // Send a text message using default options
-    // this.emailComposer.open(email);
   }
-
-
 
   checkPermission() {
     this.androidPermissions
