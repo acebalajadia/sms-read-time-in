@@ -76,7 +76,7 @@
                           user.name +
                           '-' +
                           user.branch +
-                          '.png)'
+                          '.jpg)'
                       }"
                     ></div>
                   </td>
@@ -150,7 +150,7 @@
                     <span>OT {{user.overtime}}m</span>
                 </div>
               -->
-<strong>TIME LOGS</strong>
+            <strong>TIME LOGS</strong>
               <table class="table">
                 <ng-container
                   *ngFor="let item of user.timelogs.slice().reverse()"
@@ -177,9 +177,12 @@
                         <ion-badge *ngIf="item.overtime" item-end>OT</ion-badge>
                       -->
                     </td>
+                    <td>
+                      {{item.branch}}
+                    </td>
                   </tr>
                   <tr *ngIf="item.justification">
-                    <td colspan="3">
+                    <td colspan="4">
                       <p *ngIf="item.justification">JUSTIFICATION: {{ item.justification }}</p>
                       <div class="time-stat late" *ngIf="item.late >= 30">
                         <!--

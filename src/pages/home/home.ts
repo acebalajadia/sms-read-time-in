@@ -10,8 +10,8 @@ import { EmailComposer } from '@ionic-native/email-composer';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  build = 'dev';
-//   build = 'prod';
+  // build = 'dev';
+  build = 'prod';
 
   //filters
   noOfMsgsToFetch = 4000;
@@ -22301,18 +22301,23 @@ export class HomePage {
               if (timeinMinutes > 30) {
                 //fall to 8am schedule only for BH names
                 switch (name) {
-                  case 'ben':
+                  case 'belle':
+                  case 'arnel':
+                  case 'jerome':
+                  case 'jayson':
+                  case 'json':
+                  case 'jurie':
+                  case 'eure':
                   case 'ems':
                   case 'bham':
                   case 'bam':
-                  case 'cris':
                   case 'mark':
                   case 'paul':
                   case 'chan':
-                  case 'ward':
                   case 'eric':
                   case 'son':
                   case 'ericson':
+                  case 'rr':
                     sched = new Date(fulldate + ' ' + '8:00');
                     schedout = new Date(fulldate + ' ' + '17:00');
                     break;
@@ -22329,18 +22334,23 @@ export class HomePage {
             case 8:
               //fall to 8am schedule only for BH names
               switch (name) {
-                case 'ben':
+                case 'belle':
+                case 'arnel':
+                case 'jerome':
+                case 'jayson':
+                case 'json':
+                case 'jurie':
+                case 'eure':
                 case 'ems':
                 case 'bham':
                 case 'bam':
-                case 'cris':
                 case 'mark':
                 case 'paul':
                 case 'chan':
-                case 'ward':
                 case 'eric':
                 case 'son':
                 case 'ericson':
+                case 'rr':
                   sched = new Date(fulldate + ' ' + '8:00');
                   schedout = new Date(fulldate + ' ' + '17:00');
                   break;
