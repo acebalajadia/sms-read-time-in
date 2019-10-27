@@ -38,6 +38,7 @@ export class HomePage {
   timeLogsRawdataJson;
   salesLogsRawdata;
   remittanceLogsRawdata;
+  productivityLogsRawdata;
   rawdataJson;
   messages: any = [];
   timelogs: any = [];
@@ -50,7 +51,8 @@ export class HomePage {
     { branch: 'oas', users: [] },
     { branch: 'guinobatan', users: [] },
     { branch: 'ligao', users: [] },
-    { branch: 'castilla', users: [] }
+    { branch: 'castilla', users: [] },
+    { branch: 'pilar', users: [] }
   ];
 
   salesLogs: any = [];
@@ -22044,6 +22046,10 @@ export class HomePage {
     this.mobile = '9178140654';
     this.processTimeLogs();
   }
+  generatePilarReport() {
+    this.mobile = '9171524154';
+    this.processTimeLogs();
+  }
 
   sendReportDataToEmail() {
     let dateToday = new Date()
@@ -22183,32 +22189,40 @@ export class HomePage {
         let timeLogsResult: any = $.map(smsLogsResult, function(item, i) {
           //determine branch
           let branch = '';
-          switch (item.address) {
+          let address = item.address.replace(/ /g,'');
+          switch (address) {
+            case '09178523162':
             case '+639178523162':
               branch = 'leg1';
               break;
-            case '(0917) 852 5794':
+            case '(0917)8525794':
             case '+639178525794':
+            case '09178525794':
               branch = 'leg2';
               break;
             case '+639175517548':
+            case '09175517548':
               branch = 'drg';
               break;
-            case '+63 917 533 0584':
+            case '09175330584':
             case '+639175330584':
               branch = 'oas';
               break;
-            case '+63 917 838 5603':
+            case '09178385603':
             case '+639178385603':
               branch = 'guinobatan';
               break;
-            case '+63 917 533 0854':
+            case '09175330854':
             case '+639175330854':
               branch = 'ligao';
               break;
-            case '+63 917 814 0654':
+            case '09178140654':
             case '+639178140654':
               branch = 'castilla';
+              break;
+            case '09171524154':
+            case '+639171524154':
+              branch = 'pilar';
               break;
           }
 
@@ -22301,6 +22315,7 @@ export class HomePage {
               if (timeinMinutes > 30) {
                 //fall to 8am schedule only for BH names
                 switch (name) {
+                  case 'che':
                   case 'belle':
                   case 'arnel':
                   case 'jerome':
@@ -22334,6 +22349,7 @@ export class HomePage {
             case 8:
               //fall to 8am schedule only for BH names
               switch (name) {
+                case 'che':
                 case 'belle':
                 case 'arnel':
                 case 'jerome':
@@ -22744,3 +22760,7 @@ export class HomePage {
     }
   }
 }
+
+
+//ionic cordova build --release android //generating apk
+//ionic cordova run --release android //deploy directly to phone
